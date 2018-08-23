@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id=""  onclick="openTest1('test')" >
+            2332222222222
+        </div>
+        <div id="">
+            33
+        </div>
+    </body>
+    <script src="./js/appcan.js">
+        </script>
+        <script src="./js/appcan.control.js">
+        </script>
+        <script src="./js/appcan.scrollbox.js">
+        </script>
+        <script src="./js/template.import.js">
+        </script>
+        <script src="./assets/mvvm/index.js">
+        </script>
+        <script src="./js/index.js">
+        </script>
+        
+        <script type="text/javascript">
+       
+            function openTest1(name){
+                uexWindow.open(name, '0', name+".html", '2', '', '', 0);
+            }
+        
+            function openWinInMainWithSliding() {
+                uexWindow.toggleSlidingWindow(0);
+                openTest('wintestNav/uexWindow');
+            }
+            
+            function openLeftSlidingWin() {
+                
+                uexWindow.toggleSlidingWindow(0);
+            }
+        </script>
+        <!-- uexWindow.open('lists', 0, 'lists.html', 0, '100%', '100%', 0) -->
+</html>
