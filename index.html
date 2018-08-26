@@ -19,7 +19,8 @@
         <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
             <div class="ub">
                 <div class="nav-btn" id="nav-left">
-                    <div class="fa fa-1g ub-img1">
+                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
+                        <img src="image/bread.png"/>
                     </div>
                 </div>
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">MO动态口令</h1>
@@ -74,8 +75,21 @@
             };
             
             var paramStr = JSON.stringify(params);
-
+            var marks = {
+                mark:0
+            }
+            var markStr = JSON.stringify(marks)
+            
             uexWindow.setSlidingWindow(paramStr);
+            
+            uexWindow.setSlidingWindowEnabled(1);
+        }
+        function toggle () {
+            var params  = {
+                mark:0,
+                reload:1
+            };
+            uexWindow.toggleSlidingWindow(params);
         }
     </script>
 </html>

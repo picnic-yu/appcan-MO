@@ -8,3 +8,40 @@
 	    eeeee
 	</body>
 </html>
+<script src="js/appcan.js">
+        </script>
+        <script src="js/appcan.control.js">
+        </script>
+        <script src="js/appcan.scrollbox.js">
+        </script>
+        <script src="js/template.import.js">
+        </script>
+        <script src="./assets/mvvm/index.js">
+        </script>
+        <script src="./js/index.js">
+        </script>
+
+<script type="text/javascript" charset="utf-8">
+        window.uexOnload = function(type){
+
+            
+
+            var name = uexWidgetOne.platformName;
+            
+            var params  = {
+                
+                leftSliding:{
+                    width:0,
+                    url:"draw.html"
+                }
+                
+            };
+            
+            var paramStr = JSON.stringify(params);
+            
+            uexWindow.setSlidingWindow(paramStr);
+            
+            
+        }
+	// uexWindow.setMultilPopoverFlippingEnbaled(1)
+</script>

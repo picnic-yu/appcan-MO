@@ -28,11 +28,17 @@
         <script type="text/javascript">
        
             function openTest1(name){
-                uexWindow.open(name, '0', name+".html", '2', '', '', 0);
+                var params  = {
+                mark:0,
+            };
+            uexWindow.open(name, '0', name+".html", '2', '', '', 0);
+            uexWindow.toggleSlidingWindow(params);
+                
+                
             }
         
             function openWinInMainWithSliding() {
-                uexWindow.toggleSlidingWindow(0);
+                
                 openTest('wintestNav/uexWindow');
             }
             
@@ -40,6 +46,7 @@
                 
                 uexWindow.toggleSlidingWindow(0);
             }
+            
         </script>
         <!-- uexWindow.open('lists', 0, 'lists.html', 0, '100%', '100%', 0) -->
 </html>
