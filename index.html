@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/appcan.icon.css">
         <link rel="stylesheet" href="css/appcan.control.css">
         <link rel="stylesheet" href="./css/index.css">
+        
     </head>
     
     <body class="" ontouchstart>
@@ -32,16 +33,21 @@
         </div>
             
         <div class="content">
-           9999
-           w
-           w
-           wwwwwwwwwwwwwwwwwwww
-           eeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-           rrrrrrrrrrrrrrrrrrrbr    
-           <br/>33
-           <br/>34
-           <br/>3355
-           <br/>335556
+            <div class="timer-group">
+  
+                <div class="timer minute">
+                    <div class="hand">
+                        <span id='leftItem'></span>
+                    </div>
+                    <div class="hand">
+                        <span id='rightItem'></span>
+                    </div>
+                </div>
+  
+                <div class="face">
+                    <p id="lazy"></p>  
+                </div>
+            </div>
         </div>   
         
         
@@ -91,5 +97,62 @@
             };
             uexWindow.toggleSlidingWindow(params);
         }
+        
+        
+        
+        
+        
+        
+        
+        
+    //圆环动画开始       
+        var defaults = {}
+          , one_second = 1000
+          , one_minute = one_second * 60
+          , one_hour = one_minute * 60
+          , one_day = one_hour * 24
+          , startDate = new Date()
+          , face = document.getElementById('lazy');
+        const $ = (id) => {
+            return document.getElementById(id);
+        }
+        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+        var requestAnimationFrame = (function() {
+            return  window.requestAnimationFrame       || 
+                    window.webkitRequestAnimationFrame || 
+                    window.mozRequestAnimationFrame    || 
+                    window.oRequestAnimationFrame      || 
+                    window.msRequestAnimationFrame     || 
+                function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+                };
+        }());
+        
+        tick();
+        
+        function tick() {
+        
+          var now = new Date()
+            , s = now.getSeconds(); //获取秒
+            
+            if(s>=30){
+                let num = 225 + (s-30) * 6;
+                $('rightItem').style.transform = "rotate(405deg)";
+                
+                $('leftItem').style.transform = `rotate(${num}deg)`;
+            }else{
+                let num = 225 + s * 6;
+                $('rightItem').style.transform =   `rotate(${num}deg)`;
+                $('leftItem').style.transform = "rotate(225deg)";
+            }
+           
+         
+        
+            face.innerText = s;
+          
+            requestAnimationFrame(tick);
+          
+        }
+        //圆环动画结束
     </script>
 </html>

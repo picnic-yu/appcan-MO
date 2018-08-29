@@ -5,3 +5,153 @@
     padding-top:3em;
     padding-left:1em;
 }
+
+
+
+
+
+
+
+
+.timer-group {
+        height: 70vh;
+        margin: 0 auto;
+        position: relative;
+        width: 80vw;
+    }
+
+    .timer {
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+       
+    }
+
+    .timer:after {
+        background: #fff url(http://codepen.io/images/classy_fabric.png);
+        border-radius: 50%;
+        content: "";
+        display: block;
+        position: absolute;
+    }
+
+    .timer .hand {
+        float: left;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        width: 50%;
+    }
+
+    .timer .hand span {
+        border: 50px solid rgba(0, 255, 255, .4);
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-radius: 50%;
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: rotate(225deg);
+        width: 0;
+    }
+
+    .timer .hand:first-child {
+        transform: rotate(180deg);
+    }
+
+
+   
+
+    .timer.hour {
+        background: rgba(0, 0, 0, .3);
+        height: 80vmin;
+        left: 0;
+        width: 80vmin;
+        top: 0;
+    }
+
+    .timer.hour .hand span {
+   
+        border-top-color: rgba(255, 0, 255, .4);
+        border-right-color: rgba(255, 0, 255, .4);
+        border-width: 200px;
+    }
+
+    .timer.hour:after {
+        height: 72vmin;
+        left: 4vmin;
+        width: 72vmin;
+        top: 4vmin;
+    }
+
+    .timer.minute {
+        background: rgba(0, 0, 0, .2);
+        height: 70vmin;
+        left: 5vmin;
+        width: 70vmin;
+        top: 5vmin;
+    }
+
+    .timer.minute .hand span {
+    
+        border-top-color: #1890ff;
+        border-right-color: #1890ff;
+        border-width: 35vmin;
+    }
+
+    .timer.minute:after {
+    height: 62vmin;
+    left: 4vmin;
+    width: 62vmin;
+    top: 4vmin;
+    }
+
+    .timer.second {
+    background: rgba(0, 0, 0, .2);
+    height: 60vmin;
+    left: 10vmin;
+    width: 60vmin;
+    top: 10vmin;
+    }
+
+    .timer.second .hand span {
+   
+    border-top-color: #1890ff;
+    border-right-color: #1890ff;
+    border-width: 30vmin;
+    }
+
+    .timer.second:after {
+    height: 59.2vmin;
+    left: 0.4vmin;
+    width: 59.2vmin;
+    top: 0.4vmin;
+    }
+
+    .face {
+    /* background: rgba(0, 0, 0, .1); */
+        border-radius: 50%;
+        height: 59.2vmin;
+        left: 10.4vmin;
+        padding: 33vmin 8vmin 0;
+        position: absolute;
+        width: 59.2vmin;
+        text-align: center;
+        top: 10.4vmin;
+    }
+
+    .face h2 {
+        font-weight: 300; 
+    }
+
+    .face p {
+        border-radius: 4vmin;
+        font-size: 15.2vmin;
+        font-weight: 400;
+        position: absolute;
+        top: 3.4vmin;
+        width: 52vmin;
+        left: 4vmin;
+    }

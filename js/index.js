@@ -1,3 +1,4 @@
+
 (function($) {
     appcan.button("#nav-left", "btn-act",
     function() {});
@@ -23,3 +24,6 @@
     })
 
 })($);
+
+
+
