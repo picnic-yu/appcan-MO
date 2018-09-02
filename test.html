@@ -3,9 +3,48 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<style type="text/css">
+			.item{
+                height:15vh;
+                margin-top:3vh;
+                color:red;
+                display:flex;
+                justify-items: center;
+                align-items: center;
+                
+            }
+            .item-wrap{
+                
+                   margin: 20vh auto;
+            }
+		</style>
 	</head>
 	<body>
-	    eeeee
+	    <div id="" class='wrap'>
+            
+            <div id="" class='item-wrap'>
+                
+            </div>
+            <div class='item' id="">
+                <img src="image/bread.png"/>
+                <span id="2222">
+                                                帮助与反馈
+                </span>
+            </div>
+            <div class='item' id="">
+                <img src="image/bread.png"/>
+                <span >
+                                                帮助与反馈
+                </span>
+            </div>
+            <div class='item' id="">
+                <img src="image/bread.png"/>
+                <span >
+                                                帮助与反馈
+                </span>
+            </div>
+        </div>
+
 	</body>
 </html>
 <script src="js/appcan.js">
@@ -22,26 +61,34 @@
         </script>
 
 <script type="text/javascript" charset="utf-8">
-        window.uexOnload = function(type){
+        // window.uexOnload = function(type){
+// 
+//             
+// 
+            // var name = uexWidgetOne.platformName;
+//             
+            // var params  = {
+//                 
+                // leftSliding:{
+                    // width:0,
+                    // url:"draw.html"
+                // }
+//                 
+            // };
+//             
+            // var paramStr = JSON.stringify(params);
+//             
+            // uexWindow.setSlidingWindow(paramStr);
+//             
+//             
+        // }
+        function ScannerSuccessCallBack(opCode, dataType, data) {
+    alert(data);
+}
+window.uexOnload = function(){
+    // uexScanner.open();
 
-            
-
-            var name = uexWidgetOne.platformName;
-            
-            var params  = {
-                
-                leftSliding:{
-                    width:0,
-                    url:"draw.html"
-                }
-                
-            };
-            
-            var paramStr = JSON.stringify(params);
-            
-            uexWindow.setSlidingWindow(paramStr);
-            
-            
-        }
+    uexScanner.cbOpen = ScannerSuccessCallBack;
+}
 	// uexWindow.setMultilPopoverFlippingEnbaled(1)
 </script>
