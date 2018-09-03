@@ -48,6 +48,9 @@
                     <p id="lazy"></p>  
                 </div>
             </div>
+            <div id="timeEnd">
+                11
+            </div>
         </div>   
         
         
@@ -113,7 +116,7 @@
           , one_day = one_hour * 24
           , startDate = new Date()
           , face = document.getElementById('lazy');
-        const $ = (id) => {
+        var $ = (id) => {
             return document.getElementById(id);
         }
         // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -147,9 +150,10 @@
             }
            
          
-        
+            
             face.innerText = s;
-          
+            var timeEnd = $('timeEnd');
+            timeEnd.innerText = '下一动态口令将更换与 '+(60-s)+' 秒后'
             requestAnimationFrame(tick);
           
         }

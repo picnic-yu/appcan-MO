@@ -1,52 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<title></title>
+		<link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
 		<style type="text/css">
 			.item{
-                height:15vh;
-                margin-top:3vh;
-                color:red;
-                display:flex;
+			    display:flex;
                 justify-items: center;
                 align-items: center;
+                margin-top:3vh;
+                color:#00a0e8;
+                
                 
             }
-            .item-wrap{
+            img{
+                display: block;
+            }
+            .wrap{
                 
-                   margin: 20vh auto;
+                   margin: 10vh auto;
             }
 		</style>
 	</head>
 	<body>
-	    <div id="" class='wrap'>
+	    <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
+            <div class="ub">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
+                        <img src="image/bread.png"/>
+                    </div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">重新激活</h1>
+                <div class="nav-btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+	    <div  class='wrap'>
             
-            <div id="" class='item-wrap'>
+            <div  class='item-wrap'>
                 
-            </div>
-            <div class='item' id="">
-                <img src="image/bread.png"/>
-                <span id="2222">
-                                                帮助与反馈
-                </span>
-            </div>
-            <div class='item' id="">
-                <img src="image/bread.png"/>
-                <span >
-                                                帮助与反馈
-                </span>
-            </div>
-            <div class='item' id="">
-                <img src="image/bread.png"/>
-                <span >
-                                                帮助与反馈
-                </span>
+            
+                <div class='item' >
+                    <img src="image/icon_login.png"/>
+                    <span >
+                                                    登陆激活
+                    </span>
+                </div>
+                <div class='item' onclick='handleScan()'>
+                    <img src="image/scan.png"/>
+                    <span >
+                                                    扫码激活
+                    </span>
+                </div>
+                <div class='item' onclick='handlePickImage()'>
+                    <img src="image/image.png"/>
+                    <span >
+                                                    读图激活
+                    </span>
+                </div>
             </div>
         </div>
 
 	</body>
 </html>
+
+<script src="js/aes.js"></script>
 <script src="js/appcan.js">
         </script>
         <script src="js/appcan.control.js">
@@ -61,6 +88,38 @@
         </script>
 
 <script type="text/javascript" charset="utf-8">
+
+
+//aes解密和加密开始
+
+
+ 
+ 
+ /**
+ * 加密（需要先加载lib/aes/aes.min.js文件）
+ * @param word
+ * @returns {*}
+ */
+function encrypt(word){
+    var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
+    var srcs = CryptoJS.enc.Utf8.parse(word);
+    var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+    return encrypted.toString();
+}
+
+/**
+ * 解密
+ * @param word
+ * @returns {*}
+ */
+function decrypt(word){
+    var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
+    var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+    return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+}
+
+//aes解密和加密结束
+
         // window.uexOnload = function(type){
 // 
 //             
@@ -82,13 +141,80 @@
 //             
 //             
         // }
-        function ScannerSuccessCallBack(opCode, dataType, data) {
+function ScannerSuccessCallBack(opCode, dataType, data) {
     alert(data);
+    
+    data = JSON.parse(data);
+    alert(data)
+    alert(data.code)
+    alert(typeof(data.code))
+    var str = data.code.split(" ");
+    alert(str)
+    if(str.length == 5){
+       //服务号
+       var imagesn = str[0];
+       alert(imagesn)
+       //令牌号
+       var num = str[1];
+       alert(num);
+       //标识
+       var info = decrypt(str[2]);
+       alert(info)
+       //有效期
+       var validtime = decrypt(str[3]);
+       alert(validtime)
+       //种子
+       var desp = decrypt(str[4]);
+       
+       alert(desp) 
+    }
+    
+    var imagesn = str
 }
+function handleScan () {
+
+    uexScanner.open();
+}
+function handlePickImage() {
+     alert(22)
+    var data = {
+        min:1,
+        max:1,
+        quality:1,
+        detailedInfo:true
+    }
+    var json = JSON.stringify(data);
+    uexImage.openPicker(json)
+ 
+}
+
+
+function toggle () {
+    var params  = {
+        mark:0,
+        reload:1
+    };
+    uexWindow.toggleSlidingWindow(params);
+}
+
 window.uexOnload = function(){
-    // uexScanner.open();
 
     uexScanner.cbOpen = ScannerSuccessCallBack;
+    
+    uexImage.onPickerClosed=function(info){
+        alert(info);
+        info = JSON.parse(info);
+        if(info.data.length){
+            var url = info.data[0];  
+            var result = uexScanner.recognizeFromImage(url);  
+            alert(result)
+        }
+        
+    }
+    
 }
 	// uexWindow.setMultilPopoverFlippingEnbaled(1)
+	
+	
+	
 </script>

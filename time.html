@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/appcan.icon.css">
+        <link rel="stylesheet" href="css/appcan.control.css">
+        <style type="text/css">
+            body{
+                background:#C6C6C6;
+            }
+            .content{
+                margin:8vh 0;
+            }
+            .item{
+                background:#fff;
+                padding-left:5vw;
+                height:8vh;
+                line-height: 8vh;
+                display:flex;
+                justify-items: center;
+                align-items: center;
+                border-bottom: 1px solid #e6e6e6;
+            }
+            .item:last-child {
+                border-bottom: none;
+            }
+            .dec{
+                padding:0 5vw;
+            }
+        </style>
+	</head>
+	<body>
+	    <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
+            <div class="ub">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
+                        <img src="image/bread.png"/>
+                    </div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">时间校准</h1>
+                <div class="nav-btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class='item'  >
+        
+            
+            <span >
+                                            手机当前时间
+            </span>
+        </div>
+        <div class='item' id='nowDate' >
+        
+            
+            
+        </div>
+        <div class='item'  >
+        
+            
+            <span >
+                                            UTC标准时间
+            </span>
+        </div>
+        <div class='item'  id='utcDate'>
+        
+            
+            
+        </div> 
+        </div>
+	    
+        <div class="dec">
+                                     为确保动态口令的正确有效,请保持手机时间与标准时间相差在一分钟内.
+        </div>
+	    
+	</body>
+	
+<script src="js/date.js">
+</script>
+<script src="js/appcan.js">
+</script>
+<script src="js/appcan.control.js">
+</script>
+<script src="js/appcan.scrollbox.js">
+</script>
+<script src="js/template.import.js">
+</script>
+<script src="./assets/mvvm/index.js">
+</script>
+<script src="./js/index.js">
+</script>
+<script>
+function toggle () {
+    var params  = {
+        mark:0,
+        reload:1
+    };
+    uexWindow.toggleSlidingWindow(params);
+}
+
+
+
+//圆环动画开始       
+        var utcDate = document.getElementById('utcDate')
+          
+          , nowDate = document.getElementById('nowDate');
+        
+        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+        var requestAnimationFrame = (function() {
+            return  window.requestAnimationFrame       || 
+                    window.webkitRequestAnimationFrame || 
+                    window.mozRequestAnimationFrame    || 
+                    window.oRequestAnimationFrame      || 
+                    window.msRequestAnimationFrame     || 
+                function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+                };
+        }());
+        
+        tick();
+        
+        function tick() {
+        
+            var now = new Date().Format("yyyy-MM-dd hh:mm:ss");  
+            
+         
+        
+            nowDate.innerText = now;
+          
+            requestAnimationFrame(tick);
+          
+        }
+
+
+
+
+</script>
+</html>

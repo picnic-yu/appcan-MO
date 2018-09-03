@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style type="text/css">
+            .item{
+                height:15vh;
+                margin-top:3vh;
+                color:red;
+                display:flex;
+                justify-items: center;
+                align-items: center;
+                
+            }
+            .img-wrap{
+                margin: 10vh auto 0;
+                display:flex;
+                justify-items:center;
+                align-items:center;
+            }
+            .img-wrap img{
+                display:block;
+               margin:0 auto;  
+            }
+            .item-wrap{
+                
+                   
+            }
+        </style>
+    </head>
+    <body>
+        <div id="" class='wrap'>
+            <div class="img-wrap">
+                <img src="image/logo.png"/>
+            </div>
+            
+            <div id="" class='item-wrap'>
+                
+            
+                <div class='item' id="">
+                    <img src="image/bread.png"/>
+                    <span id="2222">
+                                                    帮助与反馈
+                    </span>
+                </div>
+                <div class='item' id="">
+                    <img src="image/bread.png"/>
+                    <span >
+                                                    帮助与反馈
+                    </span>
+                </div>
+                <div class='item' id="">
+                    <img src="image/bread.png"/>
+                    <span >
+                                                    帮助与反馈
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+<script src="js/appcan.js">
+        </script>
+        <script src="js/appcan.control.js">
+        </script>
+        <script src="js/appcan.scrollbox.js">
+        </script>
+        <script src="js/template.import.js">
+        </script>
+        <script src="./assets/mvvm/index.js">
+        </script>
+        <script src="./js/index.js">
+        </script>
+
+<script type="text/javascript" charset="utf-8">
+        // window.uexOnload = function(type){
+// 
+//             
+// 
+            // var name = uexWidgetOne.platformName;
+//             
+            // var params  = {
+//                 
+                // leftSliding:{
+                    // width:0,
+                    // url:"draw.html"
+                // }
+//                 
+            // };
+//             
+            // var paramStr = JSON.stringify(params);
+//             
+            // uexWindow.setSlidingWindow(paramStr);
+//             
+//             
+        // }
+        function ScannerSuccessCallBack(opCode, dataType, data) {
+    alert(data);
+}
+window.uexOnload = function(){
+    // uexScanner.open();
+
+    uexScanner.cbOpen = ScannerSuccessCallBack;
+}
+    // uexWindow.setMultilPopoverFlippingEnbaled(1)
+</script>
