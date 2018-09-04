@@ -73,7 +73,7 @@
 	</body>
 </html>
 
-<script src="js/aes.js"></script>
+<script src="js/aes_1.js"></script>
 <script src="js/appcan.js">
         </script>
         <script src="js/appcan.control.js">
@@ -103,7 +103,7 @@
 function encrypt(word){
     var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
     var srcs = CryptoJS.enc.Utf8.parse(word);
-    var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+    var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
     return encrypted.toString();
 }
 
@@ -114,7 +114,7 @@ function encrypt(word){
  */
 function decrypt(word){
     var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
-    var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+    var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
     return CryptoJS.enc.Utf8.stringify(decrypt).toString();
 }
 
@@ -142,12 +142,10 @@ function decrypt(word){
 //             
         // }
 function ScannerSuccessCallBack(opCode, dataType, data) {
-    alert(data);
+ ;
     
     data = JSON.parse(data);
-    alert(data)
-    alert(data.code)
-    alert(typeof(data.code))
+    
     var str = data.code.split(" ");
     alert(str)
     if(str.length == 5){
@@ -168,8 +166,6 @@ function ScannerSuccessCallBack(opCode, dataType, data) {
        
        alert(desp) 
     }
-    
-    var imagesn = str
 }
 function handleScan () {
 
