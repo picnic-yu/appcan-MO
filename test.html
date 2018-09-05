@@ -25,7 +25,8 @@
             }
             .wrap{
                 
-                   margin: 10vh auto;
+                   margin: 0 auto;
+                   padding-top:10vh;
             }
 		</style>
 	</head>
@@ -73,7 +74,7 @@
 	</body>
 </html>
 
-<script src="js/aes_1.js"></script>
+<script src="js/aes.js"></script>
 <script src="js/appcan.js">
         </script>
         <script src="js/appcan.control.js">
@@ -86,24 +87,26 @@
         </script>
         <script src="./js/index.js">
         </script>
-
+<!-- 日期转化 -->
+<script src="js/date.js">
+</script>
 <script type="text/javascript" charset="utf-8">
 
 
 //aes解密和加密开始
 
 
- 
- 
- /**
+var _key = CryptoJS.enc.Utf8.parse("T#s)STq~whp]b52G"); 
+var _iv = CryptoJS.enc.Utf8.parse('Yw*M3^6JpV%0U@qk'); 
+
+/**
  * 加密（需要先加载lib/aes/aes.min.js文件）
  * @param word
  * @returns {*}
  */
 function encrypt(word){
-    var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
     var srcs = CryptoJS.enc.Utf8.parse(word);
-    var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
+    var encrypted = CryptoJS.AES.encrypt(srcs, _key, {iv:_iv,mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
     return encrypted.toString();
 }
 
@@ -113,8 +116,7 @@ function encrypt(word){
  * @returns {*}
  */
 function decrypt(word){
-    var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
-    var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
+    var decrypt = CryptoJS.AES.decrypt(word, _key, {iv:_iv,mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
     return CryptoJS.enc.Utf8.stringify(decrypt).toString();
 }
 
@@ -142,37 +144,111 @@ function decrypt(word){
 //             
         // }
 function ScannerSuccessCallBack(opCode, dataType, data) {
- ;
+ 
     
     data = JSON.parse(data);
-    
     var str = data.code.split(" ");
-    alert(str)
+    parseCode(str);
+    
+}
+//解析二维码数据
+function parseCode (str) {
+    
+    
     if(str.length == 5){
        //服务号
        var imagesn = str[0];
-       alert(imagesn)
+       
        //令牌号
        var num = str[1];
-       alert(num);
+       
        //标识
        var info = decrypt(str[2]);
-       alert(info)
+       
        //有效期
-       var validtime = decrypt(str[3]);
+       var validtime = decrypt(str[3]).toString();
        alert(validtime)
        //种子
        var desp = decrypt(str[4]);
+      
+       if(info == 'JSHS'){
+            //判断二维码是否在有效期
+            var now = new Date().Format("yyyy-MM-dd hh:mm:ss");
+            var cvalidtime = validtime.slice(0,4)+'-'+validtime.slice(4,6)+'-'+validtime.slice(6,8)+' '+validtime.slice(8,10)+':'+validtime.slice(10,12)+':00';
+
+            if(now>cvalidtime){
+                appcan.database.exec({
+                    name : 'DBSale',
+                    sql : 'CREATE TABLE User(imagesn varchar(50),info varchar(50),validtime varchar(50),desp varchar(50),num varchar(255))',
+                    callback : function(err, data, dataType, optId) {
+                        if (err) {
+                            //如果创建过程中出错了
+                            // alert('数据表创建失败');                
+                            return;
+                        } else {
+                            
+                            
+                       
+                            appcan.database.exec({
+                                name : 'DBSale',
+                                sql : 'insert into User(imagesn,info,validtime,desp,num)',
+                                callback : function(err, data, dataType, optId) {
+                                    if (err) {
+                                        alert('保存数据失败');
+                                        return;
+                                    } else {
+                                        alert('保存数据成功');
+                                    }
+                                    //data中的值为sql返回的内容
+                                }
+                            });
+                            appcan.database.exec({
+                                name : 'DBSale',
+                                sql : 'select * from User',
+                                callback : function(err, data, dataType, optId) {
+                                    if (err) {
+                                        alert('查询数据表失败');
+                                        return;
+                                    } else {
+                                        alert(data)
+                                        data = eval(data);//假设查询结果有2个字段no和name
+for (var i=0;i<data.length;i++)
+{
+alert(data[i].info);
+}
+                                        alert('查询数据表成功');
+                                    }
+                                    //data中的值为sql返回的内容
+                                }
+                            });
+                            
+                        }
+                        //data中的值为sql返回的内容
+                    }
+                });
+                
+                       //解析成功后跳转到首页
+                uexWindow.open('index', '0', "index.html", '2', '', '', 0);
+            }else{
+                alert('二维码过期')
+            }
+       }else{
+          // 无效标识
+       }
        
-       alert(desp) 
+    }else{
+        //无效二维码
     }
+}
+function handleSaveCode (){
+    
 }
 function handleScan () {
 
     uexScanner.open();
 }
 function handlePickImage() {
-     alert(22)
+     
     var data = {
         min:1,
         max:1,
@@ -198,12 +274,14 @@ window.uexOnload = function(){
     uexScanner.cbOpen = ScannerSuccessCallBack;
     
     uexImage.onPickerClosed=function(info){
-        alert(info);
+        
         info = JSON.parse(info);
         if(info.data.length){
             var url = info.data[0];  
             var result = uexScanner.recognizeFromImage(url);  
             alert(result)
+            var str = result.split(" ");
+            parseCode(str);
         }
         
     }

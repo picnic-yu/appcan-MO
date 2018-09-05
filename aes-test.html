@@ -1,0 +1,52 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Title</title>  
+	<script src="js/aes.js"></script>
+</head>  
+  
+  
+<script> 
+
+var _key = CryptoJS.enc.Utf8.parse("T#s)STq~whp]b52G"); 
+var _iv = CryptoJS.enc.Utf8.parse('Yw*M3^6JpV%0U@qk'); 
+
+/**
+ * 加密（需要先加载lib/aes/aes.min.js文件）
+ * @param word
+ * @returns {*}
+ */
+function encrypt(word){
+	var srcs = CryptoJS.enc.Utf8.parse(word);
+    var encrypted = CryptoJS.AES.encrypt(srcs, _key, {iv:_iv,mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
+    return encrypted.toString();
+}
+
+/**
+ * 解密
+ * @param word
+ * @returns {*}
+ */
+function decrypt(word){
+    var decrypt = CryptoJS.AES.decrypt(word, _key, {iv:_iv,mode:CryptoJS.mode.CBC,padding: CryptoJS.pad.Pkcs7});
+    return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+}
+
+function encryptInput(){
+	var abc = document.getElementById("input001");
+	abc.value = encrypt("123456");
+}
+
+function decryptInput(){
+	var abc = document.getElementById("input001");
+	abc.value = decrypt(abc.value);
+}
+</script>
+
+<body>  
+<input id = "input001"/>
+<button onclick="encryptInput()">加密</button>
+<button onclick="decryptInput()">解密</button>
+</body>  
+</html>
