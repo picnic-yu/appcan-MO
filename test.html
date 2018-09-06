@@ -169,7 +169,7 @@ function parseCode (str) {
        var validtime = decrypt(str[3]).toString();
        alert(validtime)
        //种子
-       var desp = decrypt(str[4]);
+       var seed = decrypt(str[4]);
       
        if(info == 'JSHS'){
             //判断二维码是否在有效期
@@ -179,7 +179,7 @@ function parseCode (str) {
             if(now>cvalidtime){
                 appcan.locStorage.val('imagesn',imagesn);
                 appcan.locStorage.val('num',num);
-                appcan.locStorage.val('desp',desp);
+                appcan.locStorage.val('seed',seed);
                 
                
                                         //解析成功后跳转到首页
