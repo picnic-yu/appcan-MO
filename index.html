@@ -44,12 +44,15 @@
                     </div>
                 </div>
   
-                <div class="face">
-                    <p id="lazy"></p>  
+                <div class="face" id='password'>222345
+                    
                 </div>
             </div>
             <div id="timeEnd">
                 11
+            </div>
+            <div id="footer">
+                22
             </div>
         </div>   
         
@@ -111,6 +114,13 @@
             uexWindow.setSlidingWindow(paramStr);
             
             uexWindow.setSlidingWindowEnabled(1);
+            
+            var num = appcan.locStorage.getVal('num');
+            if(num){
+                var footer = document.getElementById('footer');
+                footer.innerText = num;
+            }
+            
         }
         function toggle () {
             var params  = {
@@ -169,8 +179,7 @@
             }
            
          
-            
-            face.innerText = s;
+           
             var timeEnd = $('timeEnd');
             timeEnd.innerText = '下一动态口令将更换与 '+(60-s)+' 秒后'
             requestAnimationFrame(tick);

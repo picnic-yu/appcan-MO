@@ -5,7 +5,15 @@
     padding-top:3em;
     padding-left:1em;
 }
-
+#footer{
+    position: fixed;
+    bottom: 0;
+    padding: 2vh 0;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    color:#ccc;
+}
 
 
 
@@ -135,13 +143,16 @@
     .face {
     /* background: rgba(0, 0, 0, .1); */
         border-radius: 50%;
-        height: 59.2vmin;
-        left: 10.4vmin;
-        padding: 33vmin 8vmin 0;
-        position: absolute;
-        width: 59.2vmin;
+        height: 47vh;
+        /*left: 10.4vmin;*/
+        /*padding: 33vmin 8vmin 0;*/
+        /*position: absolute;*/
+        /*width: 59.2vmin;*/
         text-align: center;
-        top: 10.4vmin;
+        line-height: 47vh;
+        font-size: 12.2vmin;
+        font-weight: 400;
+        /*top: 10.4vmin;*/
     }
 
     .face h2 {
