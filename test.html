@@ -12,21 +12,52 @@
         <link rel="stylesheet" href="css/appcan.control.css">
 		<style type="text/css">
 			.item{
-			    display:flex;
-                justify-items: center;
-                align-items: center;
+			   
                 margin-top:3vh;
                 color:#00a0e8;
                 
+                min-height: 8vh;
+            }
+            .item .left{
+                float:left;
+               display:inline-block;
+                position: relative;
+                width: 50%;
+                height:8vh;
+                box-sizing:border-box;
+            }
+            .item .left img{
+                display: block;
+                position: absolute;
+                top: 0;
+                right:3vw;
+                line-height: 8vh;
+                height:100%;
                 
             }
-            img{
-                display: block;
+            .item .right{
+                display:inline-block;
+                width: 50%;
+                box-sizing:border-box;
+                position: relative;
+                text-align: left;
+                padding-left:3vw;
+                line-height: 8vh;
             }
+            
             .wrap{
                 
                    margin: 0 auto;
                    padding-top:10vh;
+            }
+            body{
+                z-index: 555555;
+                background: #fff;
+            }
+            .title{
+              height:10vh;
+              line-height: 10vh;
+              text-align: center;  
             }
 		</style>
 	</head>
@@ -49,25 +80,43 @@
             
             <div  class='item-wrap'>
                 
-            
+                <div class='title'>
+                    请选择令牌激活方式
+                </div>
                 <div class='item' >
-                    <img src="image/icon_login.png"/>
-                    <span >
-                                                    登陆激活
-                    </span>
+                    <div class='left'>
+                        <img src="image/icon_login.png"/>
+                    </div>
+                    <div class='right'>
+                         
+                                                        登陆激活
+                        
+                    </div>
+                   
                 </div>
                 <div class='item' onclick='handleScan()'>
-                    <img src="image/scan.png"/>
-                    <span >
-                                                    扫码激活
-                    </span>
+                    <div class='left'>
+                        <img src="image/scan.png"/>
+                    </div>
+                    <div class='right'>
+                         
+                                                        扫码激活
+                        
+                    </div>
+                   
                 </div>
                 <div class='item' onclick='handlePickImage()'>
-                    <img src="image/image.png"/>
-                    <span >
-                                                    读图激活
-                    </span>
+                    <div class='left'>
+                        <img src="image/image.png"/>
+                    </div>
+                    <div class='right'>
+                         
+                                                        读图激活
+                        
+                    </div>
+                   
                 </div>
+                
             </div>
         </div>
 

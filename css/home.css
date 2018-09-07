@@ -14,7 +14,10 @@
     left: 0;
     color:#ccc;
 }
-
+body{
+    z-index: 555555;
+    background: #fff;
+}
 
 
 
