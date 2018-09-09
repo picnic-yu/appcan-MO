@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <title></title>
+        <style type="text/css">
+            .item{
+                height:15vh;
+                margin-top:3vh;
+                color:red;
+                display:flex;
+                justify-items: center;
+                align-items: center;
+                
+            }
+            .img-wrap{
+                margin: 10vh auto 0;
+                display:flex;
+                justify-items:center;
+                align-items:center;
+            }
+            .img-wrap img{
+                display:block;
+               margin:0 auto;  
+            }
+            .item-wrap{
+                
+                   
+            }
+             body{
+                z-index: 555555;
+                background: #fff;
+            }
+        </style>
+    </head>
+    <script src="js/appcan.js">
+        </script>
+        <script src="js/appcan.control.js">
+        </script>
+        <script src="js/appcan.scrollbox.js">
+        </script>
+        <script src="js/template.import.js">
+        </script>
+        <script src="./assets/mvvm/index.js">
+        </script>
+        <script src="./js/index.js">
+        </script>
+
+<script type="text/javascript" charset="utf-8">
+
+window.uexOnload = function(){
+      var params  = {
+                
+                leftSliding:{
+                    width:0,
+                    url:"draw.html"
+                }
+                
+            };
+            
+            var paramStr = JSON.stringify(params);
+            var marks = {
+                mark:0
+            }
+            var markStr = JSON.stringify(marks)
+            var num = appcan.locStorage.getVal('num');
+            var seed = appcan.locStorage.getVal('seed');
+            if(num && seed){
+                uexWindow.open('home', '0', "home.html", '2', '', '', 0);
+            }
+}
+    // uexWindow.setMultilPopoverFlippingEnbaled(1)
+</script>
+    <body>
+        <div id="" class='wrap'>
+            <div class="img-wrap">
+                <img src="image/logo.png"/>
+            </div>
+            
+            <div id="" class='item-wrap'>
+                
+            
+                <div class='item' id="">
+                    <img src="image/bread.png"/>
+                    <span id="2222">
+                                                    帮助与反馈
+                    </span>
+                </div>
+                <div class='item' id="">
+                    <img src="image/bread.png"/>
+                    <span >
+                                                    帮助与反馈
+                    </span>
+                </div>
+                <div class='item' id="">
+                    <img src="image/bread.png"/>
+                    <span >
+                                                    帮助与反馈
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+

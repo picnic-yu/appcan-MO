@@ -6,45 +6,55 @@
     </head>
     <style type="text/css">
         body {
-            background:black;
+            /*background:black;*/
             /*opacity:.5;*/
            z-index: -1;
         }
         .item{
             height:8vh;
             line-height: 8vh;
-            color:red;
+            /*color:red;*/
             display:flex;
             justify-items: center;
             align-items: center;
+            padding: 0 2vw;
             border-bottom: 1px solid #fff;
+            
         }
+        img{
+            display: inline-block;
+            width:14vw;
+        }
+        .item span{
+            padding:0 2vw;
+        }
+        
     </style>
     <body>
         
 <div id="" class='wrap'>
         <div class='item' onclick="openTest1('index')" >
-        
-            <img src="image/bread.png"/>
+            <img src="image/home.png"/>
+            
             <span >
                                             首页
             </span>
         </div>
         <div class='item' onclick="openTest1('test')" >
         
-            <img src="image/bread.png"/>
+            <img src="image/refresh.png"/>
             <span >
                                             重新激活
             </span>
         </div>
         <div class='item' id="" onclick="openTest1('time')">
-            <img src="image/bread.png"/>
+            <img src="image/clock.png"/>
             <span >
                                             时间校准
             </span>
         </div>	
         <div class='item' id="">
-            <img src="image/bread.png"/>
+            <img src="image/info.png"/>
             <span >
                                             帮助与反馈
             </span>

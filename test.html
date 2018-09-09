@@ -216,7 +216,7 @@ function parseCode (str) {
        
        //有效期
        var validtime = decrypt(str[3]).toString();
-       alert(validtime)
+       
        //种子
        var seed = decrypt(str[4]);
       
@@ -225,7 +225,7 @@ function parseCode (str) {
             var now = new Date().Format("yyyy-MM-dd hh:mm:ss");
             var cvalidtime = validtime.slice(0,4)+'-'+validtime.slice(4,6)+'-'+validtime.slice(6,8)+' '+validtime.slice(8,10)+':'+validtime.slice(10,12)+':00';
 
-            if(now>cvalidtime){
+            if(now<cvalidtime){
                 appcan.locStorage.val('imagesn',imagesn);
                 appcan.locStorage.val('num',num);
                 appcan.locStorage.val('seed',seed);
