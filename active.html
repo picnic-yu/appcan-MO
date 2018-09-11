@@ -234,13 +234,31 @@ function parseCode (str) {
                                         //解析成功后跳转到首页
                 uexWindow.open('index', '0', "index.html", '2', '', '', 0);
             }else{
-                alert('二维码过期')
+                appcan.window.openToast({
+                    msg:'二维码过期',
+                    duration:1000,
+                    position:5,
+                    type:0
+                });
+               
             }
        }else{
+           appcan.window.openToast({
+                msg:'无效标识',
+                duration:1000,
+                position:5,
+                type:0
+            });
           // 无效标识
        }
        
     }else{
+        appcan.window.openToast({
+                msg:'无效二维码',
+                duration:1000,
+                position:5,
+                type:0
+            });
         //无效二维码
     }
 }

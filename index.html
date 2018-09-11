@@ -99,17 +99,20 @@
         
         var DIGITS_POWER = [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000];
         
-        function generatePassword(){
-            var key = "33423D262357423A2E47275735D37574E4722376";
+        function generatePassword(key){
+            key = key.toUpperCase();
             var value = parseInt(new Date().getTime()/60000).toString();
+       
             var sha1_result = CryptoJS.HmacSHA1(value,key);
             var keyBytes = new Array();
             var byteStr;
             var subResult = sha1_result.toString();
+           
             for (var i = 0, c = 0; i < subResult.length; i += 2, c++) {
                 byteStr = subResult.substr(i,2);
                 keyBytes[c] = parse16(byteStr);
             }
+            
             //计算偏移量
             var offset = keyBytes[keyBytes.length-1] & 0xf;
             var binary = ((keyBytes[offset] & 0x7f) << 24) | ((keyBytes[offset + 1] & 0xff) << 16) | ((keyBytes[offset + 2] & 0xff) << 8) | (keyBytes[offset + 3] & 0xff);
@@ -130,6 +133,44 @@
     <script >
         
         window.uexOnload = function(type){
+
+            
+            // 静默验证
+            appcan.ajax({
+                url : 'http://172.16.10.124:8089/iAUS/auth/active.do',
+                type : 'POST',
+                data : {
+                    loginName : 'qq',
+                    password : '123456'
+                },
+                offline : true,
+                expires:3000,
+                success : function(data) {
+                    
+                    data = JSON.parse(data)
+                    if(data.statusCode == 200){
+                        //标识
+                        appcan.locStorage.val('num',data.tokenNo);
+                        //种子
+                        appcan.locStorage.val('seed',data.tokenSeed);
+                    }
+                    
+                }, error : function(e) {
+                        //获取失败
+                     appcan.window.openToast({
+                        msg:'激活失败',
+                        duration:1000,
+                        position:5,
+                        type:0
+                    });
+                    
+                }
+            });      
+            
+            
+            
+            
+            
 
             var num = appcan.locStorage.getVal('num');
             var seed = appcan.locStorage.getVal('seed');
