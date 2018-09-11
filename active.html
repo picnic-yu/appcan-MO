@@ -363,7 +363,7 @@ window.uexOnload = function(){
         if(info.data.length){
             var url = info.data[0];  
             var result = uexScanner.recognizeFromImage(url);  
-            alert(result)
+            
             var str = result.split(" ");
             parseCode(str);
         }
