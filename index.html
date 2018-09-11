@@ -44,7 +44,7 @@
                     </div>
                 </div>
   
-                <div class="face" id='password'>222345
+                <div class="face" id='password'>
                     
                 </div>
             </div>
@@ -69,9 +69,64 @@
         </script>
         <script src="./js/index.js">
         </script>
-        <!-- outh密码 -->
-        <script src="js/sjcl.js"></script>
+        
     </body>
+    <!-- 计算密码 -->
+    <script type="text/javascript" src="js/Crypto.js"></script>
+    <script>
+        function parse16(i){
+            let two = parseInt(i, 16).toString(2);
+            let bitNum=i.length*4;
+            if (two.length < bitNum) {
+                while (two.length < bitNum) {
+                  two = "0" + two;
+                }
+            }
+            if (two.substring(0, 1) == "0") {
+                two = parseInt(two, 2);
+            } else {
+                let two_unsign = "";
+                two = parseInt(two, 2) - 1;
+                two = two.toString(2);
+                two_unsign = two.substring(1, bitNum);
+                two_unsign = two_unsign.replace(/0/g, "z");
+                two_unsign = two_unsign.replace(/1/g, "0");
+                two_unsign = two_unsign.replace(/z/g, "1");
+                two = parseInt(-two_unsign, 2);
+            }
+            return two;
+        }
+        
+        var DIGITS_POWER = [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000];
+        
+        function generatePassword(){
+            var key = "33423D262357423A2E47275735D37574E4722376";
+            var value = parseInt(new Date().getTime()/60000).toString();
+            var sha1_result = CryptoJS.HmacSHA1(value,key);
+            var keyBytes = new Array();
+            var byteStr;
+            var subResult = sha1_result.toString();
+            for (var i = 0, c = 0; i < subResult.length; i += 2, c++) {
+                byteStr = subResult.substr(i,2);
+                keyBytes[c] = parse16(byteStr);
+            }
+            //计算偏移量
+            var offset = keyBytes[keyBytes.length-1] & 0xf;
+            var binary = ((keyBytes[offset] & 0x7f) << 24) | ((keyBytes[offset + 1] & 0xff) << 16) | ((keyBytes[offset + 2] & 0xff) << 8) | (keyBytes[offset + 3] & 0xff);
+            var otp = binary % DIGITS_POWER[6];
+            var result = parseInt(otp).toString();
+            while (result.length < 6) {
+                result = "0" + result;
+            }
+            var password = document.getElementById('password');
+            password.innerText = result;
+           
+        }
+        
+        
+        
+    </script>
+    <!-- 计算密码 -->
     <script >
         
         window.uexOnload = function(type){
@@ -107,7 +162,7 @@
                 var footer = document.getElementById('footer');
                 footer.innerText = num;
             
-                GeneratePassword(seed);
+                generatePassword(seed);
             }
             
         }
@@ -157,7 +212,7 @@
             , s = now.getSeconds(); //获取秒
             if(s == 0){
                 var seed = appcan.locStorage.getVal('seed');
-                GeneratePassword(seed);
+                generatePassword(seed);
             }
             
             if(s>=30){
@@ -187,189 +242,14 @@
   
         
         
-  //生成密码      
-function HOTP(K, C){
-    var key = sjcl.codec.base32.toBits(K);
-    // Count is 64 bits long.  Note that JavaScript bitwise operations make
-    // the MSB effectively 0 in this case.
-    var count = [((C & 0xffffffff00000000) >> 32), C & 0xffffffff];
-    var otplength = 6;
-
-    var hmacsha1 = new sjcl.misc.hmac(key, sjcl.hash.sha1);
-    var code = hmacsha1.encrypt(count);
-
-    var offset = sjcl.bitArray.extract(code, 152, 8) & 0x0f;
-    var startBits = offset * 8;
-    var endBits = startBits + 4 * 8;
-    var slice = sjcl.bitArray.bitSlice(code, startBits, endBits);
-    var dbc1 = slice[0];
-    var dbc2 = dbc1 & 0x7fffffff;
-    var otp = dbc2 % Math.pow(10, otplength);
-    var result = otp.toString();
-    while (result.length < otplength)
-    {
-        result = '0' + result;
-    }
-    return result;
-}
-
-function GeneratePassword(seed)
-{
-    try{
-        seed = getEncodeString(seed);
-        var secret = seed;
-       var ctime = Math.floor((new Date() - 0) / 60000);
-       
-       var otp = HOTP(secret, ctime);
-       var password = document.getElementById('password');
-       password.innerText = otp;
-       
-    }catch(e){
-       
-    }
-   
-   
-}
 
 
 
 
-// base32
-/** 
-*加密函数 
-*返回被编码加密的字符串 
-*/  
-  
-function getEncodeString(srcString) {
-    //var srcString = 'abc';
-    var BASE32CHAR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
 
-    var i = 0;
-    var index = 0;
-    var digit = 0;
-    var currByte;
-    var nextByte;
-    var retrunString = '';
-
-
-    for (var i = 0; i < srcString.length; ) {
-        //var          index    = 0;
-        currByte = (srcString.charCodeAt(i) >= 0) ? srcString.charCodeAt(i)
-                               : (srcString.charCodeAt(i) + 256);
-
-
-        if (index > 3) {
-            if ((i + 1) < srcString.length) {
-                nextByte = (srcString.charCodeAt(i + 1) >= 0)
-                                         ? srcString.charCodeAt(i + 1)
-                                          : (srcString.charCodeAt(i + 1) + 256);
-            } else {
-                nextByte = 0;
-            }
-
-
-            digit = currByte & (0xFF >> index);
-            index = (index + 5) % 8;
-            digit <<= index;
-            digit |= (nextByte >> (8 - index));
-            i++;
-        } else {
-            digit = (currByte >> (8 - (index + 5))) & 0x1F;
-            index = (index + 5) % 8;
-
-
-            if (index == 0) {
-                i++;
-            }
-        }
-
-
-        retrunString = retrunString + BASE32CHAR.charAt(digit);
-    }
-    return retrunString.toLowerCase();
-}
           
-/** 
-*解密函数 
-*返回解密的字符串 
-*/  
- var getDecodeString = function (encodeString){  
-        var    i;  
-        var    index;  
-        var    lookup;  
-        var    offset;  
-        var    digit;  
-        var encodeString = encodeString.toUpperCase();  
-        var stringLen = parseInt((encodeString.length * 5) / 8);  
-        var bytes = new Array(stringLen);  
-        for ( var a=0;a<stringLen;a++){  
-            bytes[a]=0;  
-        }  
-  
-        for (i = 0, index = 0, offset = 0; i < encodeString.length; i++) {  
-            var charCode0 = '0'.charCodeAt(0);  
-            lookup = encodeString.charCodeAt(i) - charCode0;  
-  
-            if ((lookup < 0) || (lookup >= BASE32LOOOKUP.length)) {  
-                continue;  
-            }  
-  
-            digit = BASE32LOOOKUP[lookup];  
-  
-            if (digit == 0xFF) {  
-                continue;  
-            }  
-  
-            if (index <= 3) {  
-                index = (index + 5) % 8;  
-  
-                if (index == 0) {  
-                    bytes[offset] = bytes[offset] | digit;  
-                      
-                    offset++;  
-  
-                    if (offset >= bytes.length) {  
-                        break;  
-                    }  
-                } else {  
-                    bytes[offset] = bytes[offset] | (digit << (8 - index));  
-                      
-                }  
-            } else {  
-                index = (index + 5) % 8;  
-                bytes[offset] = bytes[offset] | (digit >>> index);  
-                  
-                offset++;  
-  
-                if (offset >= bytes.length) {  
-                    break;  
-                }  
-  
-                bytes[offset] = bytes[offset] | (digit << (8 - index));  
-                if(bytes[offset]>=256){  
-                  
-                    //var lp = parseInt(bytes[offset]/256);  
-                    
-                    bytes[offset] %= 256;   
-                }  
-            }  
-        }  
-  
-        //return bytes.join(',');  
-        var realkeyString = '';  
-        var decodeString = '';  
-        for ( var a=0;a<bytes.length;a++){  
-                                          
-            var realkey  = String.fromCharCode(bytes[a]);    
-            realkeyString += realkey;  
-            //decodeString += bytes[a];  
-              
-        }  
-        return realkeyString;  
-          
-}   
-          
+    
           
              
     </script>
