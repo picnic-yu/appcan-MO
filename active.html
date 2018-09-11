@@ -59,10 +59,13 @@
               line-height: 10vh;
               text-align: center;  
             }
+            #header2{
+                display:none;
+            }
 		</style>
 	</head>
 	<body>
-	    <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
+	    <div id='header1' class="uh bc-head  ubb bc-border" data-control="HEADER" >
             <div class="ub">
                 <div class="nav-btn" id="nav-left">
                     <div class="fa fa-1g ub-img1" onclick='toggle()'>
@@ -76,6 +79,19 @@
                 </div>
             </div>
         </div>
+        
+        <div id='header2' class="uh bc-head  ubb bc-border" data-control="HEADER" >
+            <div class="ub">
+                <div class="nav-btn" id="nav-left">
+                   
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">令牌激活</h1>
+                <div class="nav-btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1">
+                    </div>
+                </div>
+            </div>
+        </div>
 	    <div  class='wrap'>
             
             <div  class='item-wrap'>
@@ -83,7 +99,7 @@
                 <div class='title'>
                     请选择令牌激活方式
                 </div>
-                <div class='item' >
+                <div class='item' onclick='handleLogin()' >
                     <div class='left'>
                         <img src="image/icon_login.png"/>
                     </div>
@@ -269,6 +285,11 @@ function handleScan () {
 
     uexScanner.open();
 }
+
+
+function handleLogin () {
+    uexWindow.open('login', '0', "login.html", '2', '', '', 0);
+}
 function handlePickImage() {
      
     var data = {
@@ -291,10 +312,51 @@ function toggle () {
     uexWindow.toggleSlidingWindow(params);
 }
 
-window.uexOnload = function(){
+var seed = appcan.locStorage.getVal('seed');
+var num = appcan.locStorage.getVal('num');
+if(!seed){
+    var header1 = document.getElementById('header1');
+    var header2 = document.getElementById('header2');
+    header1.style.display = 'none';
+    header2.style.display = 'block';
+}
 
+
+
+
+
+
+
+window.uexOnload = function(){
+    uexWindow.setReportKey(0, 1);
+    uexWindow.onKeyPressed = function() {
+        if(!seed){
+                
+            uexWidgetOne.exit(0);
+            
+        } else{
+            appcan.window.open('home','home.html',0);
+        } 
+        
+    }
     uexScanner.cbOpen = ScannerSuccessCallBack;
-    
+    var params  = {
+                
+        leftSliding:{
+            width:0,
+            url:"draw.html"
+        }
+        
+    };
+    if(!seed){
+        var paramStr = JSON.stringify(params);
+        var marks = {
+            mark:1
+        }
+        var markStr = JSON.stringify(marks)
+        
+        uexWindow.setSlidingWindow(paramStr);
+    }
     uexImage.onPickerClosed=function(info){
         
         info = JSON.parse(info);
