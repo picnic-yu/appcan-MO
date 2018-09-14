@@ -62,6 +62,9 @@
             #header2{
                 display:none;
             }
+            .title{
+                color:#fff;
+            }
 		</style>
 	</head>
 	<body>
@@ -72,7 +75,7 @@
                         <img src="image/bread.png"/>
                     </div>
                 </div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">重新激活</h1>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">重新激活</h1>
                 <div class="nav-btn" id="nav-right">
                     <div class="fa  fa-1g  ub-img1">
                     </div>
@@ -80,18 +83,7 @@
             </div>
         </div>
         
-        <div id='header2' class="uh bc-head  ubb bc-border" data-control="HEADER" >
-            <div class="ub">
-                <div class="nav-btn" id="nav-left">
-                   
-                </div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">令牌激活</h1>
-                <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1">
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 	    <div  class='wrap'>
             
             <div  class='item-wrap'>
@@ -312,14 +304,6 @@ function toggle () {
     uexWindow.toggleSlidingWindow(params);
 }
 
-var seed = appcan.locStorage.getVal('seed');
-var num = appcan.locStorage.getVal('num');
-if(!seed){
-    var header1 = document.getElementById('header1');
-    var header2 = document.getElementById('header2');
-    header1.style.display = 'none';
-    header2.style.display = 'block';
-}
 
 
 
@@ -328,17 +312,7 @@ if(!seed){
 
 
 window.uexOnload = function(){
-    uexWindow.setReportKey(0, 1);
-    uexWindow.onKeyPressed = function() {
-        if(!seed){
-                
-            uexWidgetOne.exit(0);
-            
-        } else{
-            appcan.window.open('home','home.html',0);
-        } 
-        
-    }
+    
     uexScanner.cbOpen = ScannerSuccessCallBack;
     var params  = {
                 

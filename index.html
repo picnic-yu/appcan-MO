@@ -38,14 +38,12 @@
     <script>
   var num = appcan.locStorage.getVal('num');
   var seed = appcan.locStorage.getVal('seed');
-  
-  
-        
+
         window.uexOnload = function(type){
 
             if(!seed){
                 
-                appcan.window.open('active','active.html',0);
+                appcan.window.open('login','login.html',0);
                 
             } else{
                 appcan.window.open('home','home.html',0);

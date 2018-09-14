@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<title></title>
-		<link rel="stylesheet" href="css/fonts/font-awesome.min.css">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <title></title>
+        <link rel="stylesheet" href="css/fonts/font-awesome.min.css">
         <link rel="stylesheet" href="css/ui-box.css">
         <link rel="stylesheet" href="css/ui-base.css">
         <link rel="stylesheet" href="css/ui-color.css">
         <link rel="stylesheet" href="css/appcan.icon.css">
         <link rel="stylesheet" href="css/appcan.control.css">
         <style type="text/css">
-            body{
-                background:#C6C6C6;
-            }
-            .content{
-                margin:15vh 0 5vh;
-            }
-            .item{
-                background:#fff;
-                padding-left:5vw;
-                height:8vh;
-                line-height: 8vh;
-                display:flex;
-                justify-items: center;
-                align-items: center;
-                border-bottom: 1px solid #e6e6e6;
-            }
-            .item:last-child {
-                border-bottom: none;
-            }
-            .dec{
-                padding:0 5vw;
-            }
             .title{
                 color:#fff;
             }
+            body{
+                background:#fff;
+            }
+            .content{
+                margin:10vh 0 5vh;
+                padding:0 5vw;
+            }
+            .content p{
+                word-break: break-all;
+                text-indent: 2em;
+                line-height:4vh;
+            }
         </style>
-	</head>
-	<body>
-	    <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
+    </head>
+    <body>
+        <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
             <div class="ub">
                 <div class="nav-btn" id="nav-left">
                     <div class="fa fa-1g ub-img1" onclick='toggle()'>
                         <img src="image/bread.png"/>
                     </div>
                 </div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">时间校准</h1>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0" >帮助与反馈</h1>
                 <div class="nav-btn" id="nav-right">
                     <div class="fa  fa-1g  ub-img1">
                     </div>
@@ -54,38 +44,19 @@
             </div>
         </div>
         <div class="content">
-            <div class='item'  >
+            <p>1. 打开MO移动办公平台登录页面，输入账号和密码，点击“登录”跳转到MO动态令牌验证页面。</p>
+            <p>2. 使用手机打开“掌上长电”平台,在掌上长电平台中下载“MO动态令牌”APP。</p>
+            <p>3. 打开“MO动态令牌”APP并在首页中查看动态密码（6位）。</p>
+            <p>4. 回到MO动态令牌验证页面输入动态密码并点击“确定”，完成登录。</p>
+            <p>5. 登录验证成功后进入“应用程序”页面。单击需要使用的应用程序图标，启动应用程序。</p>
+            <p>注意：详细登录过程，请参考《MO移动办公平台使用手册》</p>
+            <p>使用中如有任何问题，请联系MO移动办公平台管理员。</p>
+                     
+        </div>
         
-            
-            <span >
-                                            手机当前时间
-            </span>
-        </div>
-        <div class='item' id='nowDate' >
         
-            
-            
-        </div>
-        <div class='item'  >
-        
-            
-            <span >
-                                            UTC标准时间
-            </span>
-        </div>
-        <div class='item'  id='utcDate'>
-        
-            
-            
-        </div> 
-        </div>
-	    
-        <div class="dec">
-                                     为确保动态口令的正确有效,请保持手机时间与标准时间相差在一分钟内.
-        </div>
-	    
-	</body>
-	
+    </body>
+    
 <script src="js/date.js">
 </script>
 <script src="js/appcan.js">
