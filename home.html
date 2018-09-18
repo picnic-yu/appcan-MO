@@ -145,12 +145,12 @@
             var params  = {
                 
                 leftSliding:{
-                    width:700,
+                    width:500,
                     url:"draw.html"
                 }
                 
             };
-            if(num && seed){
+            // if(num && seed){
                 var paramStr = JSON.stringify(params);
                 var marks = {
                     mark:1
@@ -158,7 +158,7 @@
                 var markStr = JSON.stringify(marks)
                 
                 uexWindow.setSlidingWindow(paramStr);
-            }
+            // }
             
             
             // uexWindow.setSlidingWindowEnabled(1);
