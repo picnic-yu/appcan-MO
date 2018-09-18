@@ -55,6 +55,79 @@
         </script>
        
 
+
+    <body>
+        <div id='header1' class="uh bc-head  ubb bc-border" data-control="HEADER" >
+            <div class="ub">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
+                        <img src="image/bread.png"/>
+                    </div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">登陆激活</h1>
+                <div class="nav-btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='header2' class="uh bc-head  ubb bc-border" data-control="HEADER" >
+            <div class="ub">
+                <div class="nav-btn" id="nav-left">
+                   
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">登陆激活</h1>
+                <div class="nav-btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="" class='wrap'>
+            <div class="img-wrap">
+                <img src="image/logo.png"/>
+            </div>
+            
+            <div id="" class='item-wrap'>
+                
+            
+                
+                <form>
+                    
+                  <div class="umar-a uba bc-border">
+                      <div class="ub ub-ac ubb umh5 bc-border ">
+                          <div class=" uinput ub ub-f1">
+                               <div class="uinn fa fa-link sc-text"></div>
+                            <input placeholder="请输入请求地址" id='url' value='http://172.16.10.124:8089/iAUS/auth/active.do' type="text" class="ub-f1">
+                          </div>
+                      </div>
+                      <div class="ub ub-ac ubb umh5 bc-border ">
+                          <div class=" uinput ub ub-f1">
+                               <div class="uinn fa fa-user sc-text"></div>
+                            <input placeholder="请输入用户" id='loginName'  type="text" class="ub-f1">
+                          </div>
+                      </div>
+                      <div class="ub ub-ac umh5 bc-border ">
+                          <div class=" uinput ub ub-f1">
+                            <div class="uinn fa fa-lock sc-text"></div>
+                               <input placeholder="请输入密码" id = 'password'  type="password" class="umw4 ub-f1">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="uinn">
+                      <div class="btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1"  id="submit">
+                          <div class="uinn3 fa fa-shield umh1 umw1"></div>
+                                                                                        登录
+                      </div>
+                  </div>
+                  <button type="submit"class="uinvisible"></button>
+                </form>
+            </div>
+        </div>
+
+    </body>
+    
+    
 <script type="text/javascript" charset="utf-8">
 function toggle () {
     var params  = {
@@ -67,16 +140,12 @@ function toggle () {
 
 var seed = appcan.locStorage.getVal('seed');
 var num = appcan.locStorage.getVal('num');
-if(!seed){
-    var header1 = document.getElementById('header1');
-    var header2 = document.getElementById('header2');
-    header1.style.display = 'none';
-    header2.style.display = 'block';
-}
 
 
 
+document.getElementById('loginName').value = appcan.locStorage.getVal('loginName');
 window.uexOnload = function(){
+    
     uexWindow.setReportKey(0, 1);
     uexWindow.onKeyPressed = function() {
         if(!seed){
@@ -152,75 +221,5 @@ window.uexOnload = function(){
 }
     // uexWindow.setMultilPopoverFlippingEnbaled(1)
 </script>
-    <body>
-        <div id='header1' class="uh bc-head  ubb bc-border" data-control="HEADER" >
-            <div class="ub">
-                <div class="nav-btn" id="nav-left">
-                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
-                        <img src="image/bread.png"/>
-                    </div>
-                </div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">登陆激活</h1>
-                <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id='header2' class="uh bc-head  ubb bc-border" data-control="HEADER" >
-            <div class="ub">
-                <div class="nav-btn" id="nav-left">
-                   
-                </div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">登陆激活</h1>
-                <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="" class='wrap'>
-            <div class="img-wrap">
-                <img src="image/logo.png"/>
-            </div>
-            
-            <div id="" class='item-wrap'>
-                
-            
-                
-                <form>
-                    
-                  <div class="umar-a uba bc-border">
-                      <div class="ub ub-ac ubb umh5 bc-border ">
-                          <div class=" uinput ub ub-f1">
-                               <div class="uinn fa fa-link sc-text"></div>
-                            <input placeholder="请输入请求地址" id='url' value='http://172.16.10.124:8089/iAUS/auth/active.do' type="text" class="ub-f1">
-                          </div>
-                      </div>
-                      <div class="ub ub-ac ubb umh5 bc-border ">
-                          <div class=" uinput ub ub-f1">
-                               <div class="uinn fa fa-user sc-text"></div>
-                            <input placeholder="请输入用户" id='loginName' value='qq' type="text" class="ub-f1">
-                          </div>
-                      </div>
-                      <div class="ub ub-ac umh5 bc-border ">
-                          <div class=" uinput ub ub-f1">
-                            <div class="uinn fa fa-lock sc-text"></div>
-                               <input placeholder="请输入密码" id = 'password' value='123456' type="password" class="umw4 ub-f1">
-                          </div>
-                      </div>
-                  </div>
-                  <div class="uinn">
-                      <div class="btn ub ub-ac bc-text-head ub-pc bc-btn uc-a1"  id="submit">
-                          <div class="uinn3 fa fa-shield umh1 umw1"></div>
-                                                                                        登录
-                      </div>
-                  </div>
-                  <button type="submit"class="uinvisible"></button>
-                </form>
-            </div>
-        </div>
-
-    </body>
 </html>
 

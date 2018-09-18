@@ -54,7 +54,7 @@
                 z-index: 555555;
                 background: #fff;
             }
-            .title{
+            .title-des{
               height:10vh;
               line-height: 10vh;
               text-align: center;  
@@ -83,12 +83,24 @@
             </div>
         </div>
         
+        <div id='header2' class="uh bc-head  ubb bc-border" data-control="HEADER" >
+            <div class="ub">
+                <div class="nav-btn" id="nav-left">
+                   
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">重新激活</h1>
+                <div class="nav-btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1">
+                    </div>
+                </div>
+            </div>
+        </div>
         
 	    <div  class='wrap'>
             
             <div  class='item-wrap'>
                 
-                <div class='title'>
+                <div class='title-des'>
                     请选择令牌激活方式
                 </div>
                 <div class='item' onclick='handleLogin()' >
@@ -148,6 +160,18 @@
 <script src="js/date.js">
 </script>
 <script type="text/javascript" charset="utf-8">
+var seed = appcan.locStorage.getVal('seed');
+var num = appcan.locStorage.getVal('num');
+if(!seed){
+    var header1 = document.getElementById('header1');
+    var header2 = document.getElementById('header2');
+    header1.style.display = 'none';
+    header2.style.display = 'block';
+}
+
+
+
+
 
 
 //aes解密和加密开始
