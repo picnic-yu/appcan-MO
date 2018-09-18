@@ -146,17 +146,6 @@ var num = appcan.locStorage.getVal('num');
 document.getElementById('loginName').value = appcan.locStorage.getVal('loginName');
 window.uexOnload = function(){
     
-    uexWindow.setReportKey(0, 1);
-    uexWindow.onKeyPressed = function() {
-        if(!seed){
-                
-            uexWidgetOne.exit(0);
-            
-        } else{
-            appcan.window.open('home','home.html',0);
-        } 
-        
-    }
     
     
       appcan.button("#submit", "ani-act", function() {

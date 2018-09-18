@@ -336,6 +336,17 @@ function toggle () {
 
 
 window.uexOnload = function(){
+    uexWindow.setReportKey(0, 1);
+    uexWindow.onKeyPressed = function() {
+        if(!seed){
+                
+            uexWidgetOne.exit(0);
+            
+        } else{
+            appcan.window.open('home','home.html',0);
+        } 
+        
+    }
     
     uexScanner.cbOpen = ScannerSuccessCallBack;
     var params  = {
