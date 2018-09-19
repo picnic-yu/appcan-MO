@@ -103,17 +103,6 @@
                 <div class='title-des'>
                     请选择令牌激活方式
                 </div>
-                <div class='item' onclick='handleLogin()' >
-                    <div class='left'>
-                        <img src="image/icon_login.png"/>
-                    </div>
-                    <div class='right'>
-                         
-                                                        登陆激活
-                        
-                    </div>
-                   
-                </div>
                 <div class='item' onclick='handleScan()'>
                     <div class='left'>
                         <img src="image/scan.png"/>
@@ -301,11 +290,6 @@ function handleScan () {
 
     uexScanner.open();
 }
-
-
-function handleLogin () {
-    uexWindow.open('login', '0', "login.html", '2', '', '', 0);
-}
 function handlePickImage() {
      
     var data = {
@@ -337,16 +321,6 @@ function toggle () {
 
 window.uexOnload = function(){
     uexWindow.setReportKey(0, 1);
-    uexWindow.onKeyPressed = function() {
-        if(!seed){
-                
-            uexWidgetOne.exit(0);
-            
-        } else{
-            appcan.window.open('home','home.html',0);
-        } 
-        
-    }
     
     uexScanner.cbOpen = ScannerSuccessCallBack;
     var params  = {

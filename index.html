@@ -17,7 +17,44 @@
     </head>
     
     <body class="" ontouchstart>
-        
+        <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
+            <div class="ub">
+                <div class="nav-btn" id="nav-left">
+                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
+                        <img src="image/bread.png"/>
+                    </div>
+                </div>
+                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">MO动态口令</h1>
+                <div class="nav-btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div class="content">
+            <div class="timer-group">
+  
+                <div class="timer minute">
+                    <div class="hand">
+                        <span id='leftItem'></span>
+                    </div>
+                    <div class="hand">
+                        <span id='rightItem'></span>
+                    </div>
+                </div>
+  
+                <div class="face" id='password'>
+                    
+                </div>
+            </div>
+            <div id="timeEnd">
+                11
+            </div>
+            <div id="footer">
+                22
+            </div>
+        </div>   
         
         
         <script src="js/appcan.js">
@@ -34,26 +71,204 @@
         </script>
         
     </body>
-     
+    <!-- 计算密码 -->
+    <script type="text/javascript" src="js/Crypto.js"></script>
     <script>
-  var num = appcan.locStorage.getVal('num');
-  var seed = appcan.locStorage.getVal('seed');
-
-        window.uexOnload = function(type){
-
-            if(!seed){
-                
-                appcan.window.open('active','active.html',0);
-                
-            } else{
-                appcan.window.open('home','home.html',0);
-            } 
-            
-         
-           
-            
+        function parse16(i){
+            let two = parseInt(i, 16).toString(2);
+            let bitNum=i.length*4;
+            if (two.length < bitNum) {
+                while (two.length < bitNum) {
+                  two = "0" + two;
+                }
+            }
+            if (two.substring(0, 1) == "0") {
+                two = parseInt(two, 2);
+            } else {
+                let two_unsign = "";
+                two = parseInt(two, 2) - 1;
+                two = two.toString(2);
+                two_unsign = two.substring(1, bitNum);
+                two_unsign = two_unsign.replace(/0/g, "z");
+                two_unsign = two_unsign.replace(/1/g, "0");
+                two_unsign = two_unsign.replace(/z/g, "1");
+                two = parseInt(-two_unsign, 2);
+            }
+            return two;
         }
         
+        var DIGITS_POWER = [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000];
+        
+        function generatePassword(key){
+            key = key.toUpperCase();
+            var value = parseInt(new Date().getTime()/60000).toString();
        
+            var sha1_result = CryptoJS.HmacSHA1(value,key);
+            var keyBytes = new Array();
+            var byteStr;
+            var subResult = sha1_result.toString();
+           
+            for (var i = 0, c = 0; i < subResult.length; i += 2, c++) {
+                byteStr = subResult.substr(i,2);
+                keyBytes[c] = parse16(byteStr);
+            }
+            
+            //计算偏移量
+            var offset = keyBytes[keyBytes.length-1] & 0xf;
+            var binary = ((keyBytes[offset] & 0x7f) << 24) | ((keyBytes[offset + 1] & 0xff) << 16) | ((keyBytes[offset + 2] & 0xff) << 8) | (keyBytes[offset + 3] & 0xff);
+            var otp = binary % DIGITS_POWER[6];
+            var result = parseInt(otp).toString();
+            while (result.length < 6) {
+                result = "0" + result;
+            }
+            var password = document.getElementById('password');
+            password.innerText = result;
+           
+        }
+        
+        
+        
+    </script>
+    <!-- 计算密码 -->
+    <script >
+    
+  var num = appcan.locStorage.getVal('num');
+  var seed = appcan.locStorage.getVal('seed');
+  
+        
+        window.uexOnload = function(type){
+                //静默验证
+            if(!seed){
+                    //获取用户名
+                var loginName = appcan.getLocVal("loginName");
+                    //接口验证
+                appcan.ajax({
+                    url : 'https://appdev.cypc.com.cn/multiportal/iAUS_active',
+                    type : 'POST',
+                    data : {loginName:loginName},
+                    // offline : false,
+                    //offlineDataPath : 'wgt://aaa/',
+                    contentType : false,
+                    success : function(data) {
+                        //alert("data=="+data);
+                        var status = JSON.parse(data).statusCode;
+                        if (status == 200) {
+                            data = JSON.parse(data);
+                            //alert("扫码认证成功！");
+                            appcan.window.openToast("获取成功", "2000", 5, 0);
+                            //标识
+                            appcan.locStorage.val('num',data.tokenNo);
+                            //种子
+                            appcan.locStorage.val('seed',data.tokenSeed);
+                            generatePassword(data.tokenSeed);
+                            //alert(JSON.parse(data).timestamp);//获取code的时间，60秒内有效
+                            //callback();
+                        } else {
+                            appcan.window.openToast("获取失败", "2000", 5, 0);
+                            //alert("人脸不匹配！");
+                        }
+                    },
+                    error : function(e) {
+                        appcan.window.openToast("获取失败", "2000", 5, 0);
+                        //alert("error" + e);
+                    }
+                });
+            }
+            var name = uexWidgetOne.platformName;
+            
+            var params  = {
+                
+                leftSliding:{
+                    width:500,
+                    url:"draw.html"
+                }
+                
+            };
+            // if(num && seed){
+                var paramStr = JSON.stringify(params);
+                var marks = {
+                    mark:1
+                }
+                var markStr = JSON.stringify(marks)
+                
+                uexWindow.setSlidingWindow(paramStr);
+            // }
+           
+            if(num){
+                var footer = document.getElementById('footer');
+                footer.innerText = num;
+            
+                generatePassword(seed);
+            }
+            
+        }
+        function toggle () {
+            var params  = {
+                mark:0,
+                reload:1
+            };
+            uexWindow.toggleSlidingWindow(params);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+    //圆环动画开始       
+        var defaults = {}
+          , one_second = 1000
+          , one_minute = one_second * 60
+          , one_hour = one_minute * 60
+          , one_day = one_hour * 24
+          , startDate = new Date()
+          , face = document.getElementById('lazy');
+        var $ = (id) => {
+            return document.getElementById(id);
+        }
+        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+        var requestAnimationFrame = (function() {
+            return  window.requestAnimationFrame       || 
+                    window.webkitRequestAnimationFrame || 
+                    window.mozRequestAnimationFrame    || 
+                    window.oRequestAnimationFrame      || 
+                    window.msRequestAnimationFrame     || 
+                function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+                };
+        }());
+        
+        tick();
+        
+        function tick() {
+        
+          var now = new Date()
+            , s = now.getSeconds(); //获取秒
+            if(s == 0){
+                generatePassword(seed);
+            }
+            
+            if(s>=30){
+                let num = 225 + (s-30) * 6;
+                $('rightItem').style.transform = "rotate(405deg)";
+                
+                $('leftItem').style.transform = `rotate(${num}deg)`;
+            }else{
+                let num = 225 + s * 6;
+                $('rightItem').style.transform =   `rotate(${num}deg)`;
+                $('leftItem').style.transform = "rotate(225deg)";
+            }
+           
+         
+           
+            var timeEnd = $('timeEnd');
+            timeEnd.innerText = '下一动态口令将更换与 '+(60-s)+' 秒后'
+            requestAnimationFrame(tick);
+          
+        }
+        //圆环动画结束
+  
     </script>
 </html>
