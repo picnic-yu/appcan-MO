@@ -80,74 +80,12 @@ function toggle () {
     uexWindow.toggleSlidingWindow(params);
 }
 
-
-
-//圆环动画开始       
-        var utcDate = document.getElementById('utcDate')
-          
-          , nowDate = document.getElementById('nowDate');
-        
-        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-        var requestAnimationFrame = (function() {
-            return  window.requestAnimationFrame       || 
-                    window.webkitRequestAnimationFrame || 
-                    window.mozRequestAnimationFrame    || 
-                    window.oRequestAnimationFrame      || 
-                    window.msRequestAnimationFrame     || 
-                function( callback ){
-                window.setTimeout(callback, 1000 / 60);
-                };
-        }());
-        
-        tick();
-        tickLocalTime();
-        function tick() {
-        
-            var now = new Date().Format("yyyy-MM-dd hh:mm:ss");  
-            
-         
-        
-            nowDate.innerText = now;
-          
-            requestAnimationFrame(tick);
-          
-        }
-        function tickLocalTime() {
-            
-            var now = getLocalTime(8).Format("yyyy-MM-dd hh:mm:ss");  
-            
-         
-        
-            utcDate.innerText = now;
-          
-            requestAnimationFrame(tickLocalTime);
-          
-        }
-
-
-//时区时间转换
-function getLocalTime(i) {
- 
-    //参数i为时区值数字，比如北京为东八区则输进8,西5输入-5
- 
-    if (typeof i !== 'number') return;
- 
-    var d = new Date();
- 
-    //得到1970年一月一日到现在的秒数
- 
-    var len = d.getTime();
-    
-    //本地时间与GMT时间的时间偏移差
- 
-    var offset = d.getTimezoneOffset() * 60000;
- 
-    //得到现在的格林尼治时间
- 
-    var utcTime = len + offset;
- 
-    return new Date(utcTime + 3600000 * i);
- 
+window.uexOnload = function(){
+             
+    uexWindow.setReportKey(0,1);
+    uexWindow.onKeyPressed = function(keyCode){
+        uexWidget.finishWidget("","aaamn10055",0);
+    } 
 }
 </script>
 </html>

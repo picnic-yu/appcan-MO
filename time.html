@@ -101,6 +101,15 @@
 <script src="./js/index.js">
 </script>
 <script>
+window.uexOnload = function(){
+             
+    uexWindow.setReportKey(0,1);
+    uexWindow.onKeyPressed = function(keyCode){
+        uexWidget.finishWidget("","aaamn10055",0);
+    } 
+}
+
+
 function toggle () {
     var params  = {
         mark:0,
