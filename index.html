@@ -132,7 +132,7 @@
     <!-- 计算密码 -->
     <script >
     
-  var num = appcan.locStorage.getVal('num');
+ 
   var seed = appcan.locStorage.getVal('seed');
   
         
@@ -193,7 +193,7 @@
                 
                 uexWindow.setSlidingWindow(paramStr);
             // }
-           
+            var num = appcan.locStorage.getVal('num');
             if(num){
                 var footer = document.getElementById('footer');
                 footer.innerText = num;

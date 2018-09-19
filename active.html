@@ -323,23 +323,7 @@ window.uexOnload = function(){
     uexWindow.setReportKey(0, 1);
     
     uexScanner.cbOpen = ScannerSuccessCallBack;
-    var params  = {
-                
-        leftSliding:{
-            width:700,
-            url:"draw.html"
-        }
-        
-    };
-    if(!seed){
-        var paramStr = JSON.stringify(params);
-        var marks = {
-            mark:1
-        }
-        var markStr = JSON.stringify(marks)
-        
-        uexWindow.setSlidingWindow(paramStr);
-    }
+    
     uexImage.onPickerClosed=function(info){
         
         info = JSON.parse(info);
