@@ -161,6 +161,8 @@
                             //种子
                             appcan.locStorage.val('seed',data.tokenSeed);
                             generatePassword(data.tokenSeed);
+                            let footer = document.getElementById('footer');
+                            footer.innerText = data.tokenNo;
                             //alert(JSON.parse(data).timestamp);//获取code的时间，60秒内有效
                             //callback();
                         } else {
