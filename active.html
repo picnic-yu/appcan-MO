@@ -90,7 +90,8 @@
                 </div>
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">重新激活</h1>
                 <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1">
+                    <div class="fa  fa-1g  ub-img1 title" onclick='handleBack'>
+                                                                        返回
                     </div>
                 </div>
             </div>
@@ -303,7 +304,9 @@ function handlePickImage() {
  
 }
 
-
+ function handleBack (){
+     uexWidget.finishWidget("","aaamn10055",0);
+ }
 function toggle () {
     var params  = {
         mark:0,

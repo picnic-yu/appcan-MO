@@ -38,7 +38,8 @@
                 </div>
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0" >帮助与反馈</h1>
                 <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1">
+                    <div class="fa  fa-1g  ub-img1 title" onclick='handleBack'>
+                                                                        返回
                     </div>
                 </div>
             </div>
@@ -79,7 +80,9 @@ function toggle () {
     };
     uexWindow.toggleSlidingWindow(params);
 }
-
+ function handleBack (){
+     uexWidget.finishWidget("","aaamn10055",0);
+ }
 window.uexOnload = function(){
              
     uexWindow.setReportKey(0,1);

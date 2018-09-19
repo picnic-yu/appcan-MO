@@ -26,7 +26,8 @@
                 </div>
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">MO动态口令</h1>
                 <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1">
+                    <div class="fa  fa-1g  ub-img1 title" onclick='handleBack'>
+                                                                        返回
                     </div>
                 </div>
             </div>
@@ -132,7 +133,9 @@
     <!-- 计算密码 -->
     <script >
     
- 
+ function handleBack (){
+     uexWidget.finishWidget("","aaamn10055",0);
+ }
   var seed = appcan.locStorage.getVal('seed');
   
         
