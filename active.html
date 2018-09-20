@@ -150,8 +150,8 @@
 <script src="js/date.js">
 </script>
 <script type="text/javascript" charset="utf-8">
-var seed = appcan.locStorage.getVal('seed');
-var num = appcan.locStorage.getVal('num');
+var seed = appcan.locStorage.getVal('aaamn10055_seed');
+var num = appcan.locStorage.getVal('aaamn10055_num');
 if(!seed){
     var header1 = document.getElementById('header1');
     var header2 = document.getElementById('header2');
@@ -248,9 +248,9 @@ function parseCode (str) {
             var cvalidtime = validtime.slice(0,4)+'-'+validtime.slice(4,6)+'-'+validtime.slice(6,8)+' '+validtime.slice(8,10)+':'+validtime.slice(10,12)+':00';
 
             if(now<cvalidtime){
-                appcan.locStorage.val('imagesn',imagesn);
-                appcan.locStorage.val('num',num);
-                appcan.locStorage.val('seed',seed);
+                appcan.locStorage.val('aaamn10055_imagesn',imagesn);
+                appcan.locStorage.val('aaamn10055_num',num);
+                appcan.locStorage.val('aaamn10055_seed',seed);
                 
                
                                         //解析成功后跳转到首页

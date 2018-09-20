@@ -33,27 +33,27 @@
     <body>
         
 <div id="" class='wrap'>
-        <div class='item' onclick="openTest1('index')" >
+        <div class='item' onclick="handleLink('index')" >
             <img src="image/home.png"/>
             
             <span >
                                             首页
             </span>
         </div>
-        <div class='item' onclick="openTest1('active')" >
+        <div class='item' onclick="handleLink('active')" >
         
             <img src="image/refresh.png"/>
             <span >
                                             重新激活
             </span>
         </div>
-        <div class='item' id="" onclick="openTest1('time')">
+        <div class='item' id="" onclick="handleLink('time')">
             <img src="image/clock.png"/>
             <span >
                                             时间校准
             </span>
         </div>	
-        <div class='item'  onclick="openTest1('about')">
+        <div class='item'  onclick="handleLink('about')">
             <img src="image/info.png"/>
             <span >
                                             帮助与反馈
@@ -77,7 +77,7 @@
         
 <script type="text/javascript">
    
-    function openTest1(name){
+    function handleLink(name){
         var params  = {
             mark:0,
         };
