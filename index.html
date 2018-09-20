@@ -19,14 +19,15 @@
     <body class="" ontouchstart>
         <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
             <div class="ub">
-                <div class="nav-btn" id="nav-left">
-                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
-                        <img src="image/bread.png"/>
+                <div class="nav-btn btn" id="nav-left">
+                    <div class="fa fa-1g ub-img1 slide" >
+                        <img  src="image/bread.png"/ >
                     </div>
                 </div>
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">MO动态口令</h1>
-                <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1 title" onclick='handleBack'>
+                <div class="nav-btn btn" id="nav-right">
+                    <div class="fa  fa-1g  ub-img1 title back" >
+                        
                                                                         返回
                     </div>
                 </div>
@@ -50,10 +51,10 @@
                 </div>
             </div>
             <div id="timeEnd">
-                11
+                
             </div>
             <div id="footer">
-                22
+                
             </div>
         </div>   
         
@@ -140,6 +141,21 @@
   
         
         window.uexOnload = function(type){
+            //处理返回事件
+            appcan.button(".back", "btn-act", function(){
+                uexWidget.finishWidget("","aaamn10055",0);
+            });
+            
+            //切换侧滑栏
+            appcan.button(".slide", "btn-act", function(){
+                var params  = {
+                    mark:0,
+                    reload:1
+                };
+
+                uexWindow.toggleSlidingWindow(params);
+            });
+            
             //静默验证
         
                 //获取用户名
@@ -216,13 +232,7 @@
                 uexWidget.finishWidget("","aaamn10055",0);
             } 
         }
-        function toggle () {
-            var params  = {
-                mark:0,
-                reload:1
-            };
-            uexWindow.toggleSlidingWindow(params);
-        }
+        
         
         
         

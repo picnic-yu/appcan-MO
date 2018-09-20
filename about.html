@@ -32,13 +32,13 @@
         <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
             <div class="ub">
                 <div class="nav-btn" id="nav-left">
-                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
-                        <img src="image/bread.png"/>
+                    <div class="fa fa-1g ub-img1" >
+                        <img class='slide' src="image/bread.png"/>
                     </div>
                 </div>
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0" >帮助与反馈</h1>
                 <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1 title" onclick='handleBack'>
+                    <div class="fa  fa-1g  ub-img1 title back" >
                                                                         返回
                     </div>
                 </div>
@@ -73,22 +73,27 @@
 <script src="./js/index.js">
 </script>
 <script>
-function toggle () {
-    var params  = {
-        mark:0,
-        reload:1
-    };
-    uexWindow.toggleSlidingWindow(params);
-}
- function handleBack (){
-     uexWidget.finishWidget("","aaamn10055",0);
- }
+
 window.uexOnload = function(){
              
     uexWindow.setReportKey(0,1);
     uexWindow.onKeyPressed = function(keyCode){
         uexWidget.finishWidget("","aaamn10055",0);
     } 
+    //处理返回事件
+    appcan.button(".back", "btn-act", function(){
+        uexWidget.finishWidget("","aaamn10055",0);
+    });
+    
+    //切换侧滑栏
+    appcan.button(".slide", "btn-act", function(){
+        var params  = {
+            mark:0,
+            reload:1
+        };
+
+        uexWindow.toggleSlidingWindow(params);
+    });
 }
 </script>
 </html>

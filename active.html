@@ -71,31 +71,20 @@
 	    <div id='header1' class="uh bc-head  ubb bc-border" data-control="HEADER" >
             <div class="ub">
                 <div class="nav-btn" id="nav-left">
-                    <div class="fa fa-1g ub-img1" onclick='toggle()'>
-                        <img src="image/bread.png"/>
+                    <div class="fa fa-1g ub-img1" >
+                        <img class='slide' src="image/bread.png"/>
                     </div>
                 </div>
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">重新激活</h1>
                 <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id='header2' class="uh bc-head  ubb bc-border" data-control="HEADER" >
-            <div class="ub">
-                <div class="nav-btn" id="nav-left">
-                   
-                </div>
-                <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">重新激活</h1>
-                <div class="nav-btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1 title" onclick='handleBack'>
+                    <div class="fa  fa-1g  ub-img1 title back" >
                                                                         返回
                     </div>
                 </div>
             </div>
         </div>
+        
+        
         
 	    <div  class='wrap'>
             
@@ -152,17 +141,6 @@
 <script type="text/javascript" charset="utf-8">
 var seed = appcan.locStorage.getVal('aaamn10055_seed');
 var num = appcan.locStorage.getVal('aaamn10055_num');
-if(!seed){
-    var header1 = document.getElementById('header1');
-    var header2 = document.getElementById('header2');
-    header1.style.display = 'none';
-    header2.style.display = 'block';
-}
-
-
-
-
-
 
 //aes解密和加密开始
 
@@ -304,18 +282,23 @@ function handlePickImage() {
  
 }
 
- function handleBack (){
-     uexWidget.finishWidget("","aaamn10055",0);
- }
-function toggle () {
-    var params  = {
-        mark:0,
-        reload:1
-    };
-    uexWindow.toggleSlidingWindow(params);
-}
+
 
 window.uexOnload = function(){
+    //处理返回事件
+    appcan.button(".back", "btn-act", function(){
+        uexWidget.finishWidget("","aaamn10055",0);
+    });
+    
+    //切换侧滑栏
+    appcan.button(".slide", "btn-act", function(){
+        var params  = {
+            mark:0,
+            reload:1
+        };
+
+        uexWindow.toggleSlidingWindow(params);
+    });
     
     uexScanner.cbOpen = ScannerSuccessCallBack;
     
