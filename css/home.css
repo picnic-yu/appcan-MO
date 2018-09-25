@@ -1,9 +1,36 @@
 #Header {
 	color:rgba(255,255,255,1);
 }
+.link_wrap{
+   padding-top:3em; 
+}
+.item{
+    height:8vh;
+    line-height: 8vh;
+    width:25vw;
+    float:left;
+    box-sizing:border-box;
+    /*color:red;*/
+    padding: 0 2vw;
+    border-bottom: 1px solid #e6e6e6;
+    
+}
+img{
+    display: inline-block;
+    width:3.5vmin;
+    height:3.5vmin;
+    /*width:14vw;*/
+}
+.item span{
+   font-size: 3.2vmin;
+}
+
+
+
 .content{
-    padding-top:3em;
+    position:relative;
     padding-left:1em;
+    margin-top:5em;
 }
 #footer{
     position: fixed;
