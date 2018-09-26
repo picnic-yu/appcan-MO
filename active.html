@@ -65,6 +65,11 @@
             .title{
                 color:#fff;
             }
+            .uh_ios7 .uh {
+
+                padding: 1em 0 0;
+            
+            }
 		</style>
 	</head>
 	<body>
@@ -258,7 +263,7 @@ function handlePickImage() {
 window.uexOnload = function(){
     //处理返回事件
     appcan.button(".back", "btn-act", function(){
-        uexWidget.finishWidget("","aaamn10055",0);
+        uexWindow.open('index', '0', "index.html", '0', '', '', 0);
     });
     
     
@@ -278,10 +283,15 @@ window.uexOnload = function(){
         
     }
     
-    uexWindow.setReportKey(0,1);
-    uexWindow.onKeyPressed = function(keyCode){
-        uexWidget.finishWidget("","aaamn10055",0);
-    } 
+    var ios7style=uexWidgetOne.iOS7Style;
+
+    var isFullScreen = uexWidgetOne.isFullScreen;
+
+    if (ios7style == '1' && isFullScreen != '1') {
+    
+        document.getElementsByTagName('body')[0].className += 'uh_ios7'; 
+    
+    }
     
 }
 	// uexWindow.setMultilPopoverFlippingEnbaled(1)
