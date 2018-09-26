@@ -1,6 +1,11 @@
 #Header {
 	color:rgba(255,255,255,1);
 }
+.uh_ios7 .uh {
+
+padding: 1em 0 0;
+
+}
 .link_wrap{
    padding-top:3em; 
 }
@@ -11,18 +16,26 @@
     float:left;
     box-sizing:border-box;
     /*color:red;*/
-    padding: 0 2vw;
+    padding-left: 2vw;
     border-bottom: 1px solid #e6e6e6;
+    border-right:  1px solid #e6e6e6;
     
+}
+.item:first-child{
+    width:20vw;
+}
+.item:last-child{
+    width:30vw;
+    border-right:  none;
 }
 img{
     display: inline-block;
-    width:3.5vmin;
-    height:3.5vmin;
+    width:3.9vmin;
+    height:3.9vmin;
     /*width:14vw;*/
 }
 .item span{
-   font-size: 3.2vmin;
+   font-size:4vmin;
 }
 
 
@@ -30,7 +43,7 @@ img{
 .content{
     position:relative;
     padding-left:1em;
-    margin-top:5em;
+    margin-top:4em;
 }
 #footer{
     position: fixed;

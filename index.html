@@ -19,18 +19,10 @@
     <body class="" ontouchstart>
         <div class="uh bc-head  ubb bc-border" data-control="HEADER" >
             <div class="ub">
-                <div class="nav-btn btn" id="nav-left">
-                    <div class="fa fa-1g ub-img1 slide" >
-                     
-                    </div>
-                </div>
+                <div class="nav-btn" id="nav-left">  
+                    <div class="fa fa-angle-left fa-2x title back"></div>  
+                </div>  
                 <h1 class="ut ub-f1 ulev-3 ut-s tx-c title" tabindex="0">MO动态口令</h1>
-                <div class="nav-btn btn" id="nav-right">
-                    <div class="fa  fa-1g  ub-img1 title back" >
-                        
-                                                                        返回
-                    </div>
-                </div>
             </div>
         </div>
         <div id="" class='link_wrap'>
@@ -170,6 +162,17 @@
   
         
         window.uexOnload = function(type){
+            
+            var ios7style=uexWidgetOne.iOS7Style;
+
+            var isFullScreen = uexWidgetOne.isFullScreen;
+
+            if (ios7style == '1' && isFullScreen != '1') {
+            
+                $("body").addClass("uh_ios7");
+            
+            }
+        
             //处理返回事件
             appcan.button(".back", "btn-act", function(){
                 uexWidget.finishWidget("","aaamn10055",0);
