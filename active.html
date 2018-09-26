@@ -170,7 +170,7 @@ function decrypt(word){
 
 function ScannerSuccessCallBack(opCode, dataType, data) {
  
-    
+    alert(data)
     data = JSON.parse(data);
     var str = data.code.split(" ");
     parseCode(str);
