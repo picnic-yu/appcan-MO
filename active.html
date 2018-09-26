@@ -265,20 +265,23 @@ window.uexOnload = function(){
     appcan.button(".back", "btn-act", function(){
         uexWindow.open('index', '0', "index.html", '0', '', '', 0);
     });
-    
-    
-    
+
     uexScanner.cbOpen = ScannerSuccessCallBack;
     
     uexImage.onPickerClosed=function(info){
-        
+        alert(info)
         info = JSON.parse(info);
         if(info.data.length){
             var url = info.data[0];  
-            var result = uexScanner.recognizeFromImage(url);  
+            try{
+                var result = uexScanner.recognizeFromImage(url);  
             
-            var str = result.split(" ");
-            parseCode(str);
+                var str = result.split(" ");
+                parseCode(str); 
+            }catch(e){
+                alert(e)  
+            }
+            
         }
         
     }
