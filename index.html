@@ -73,7 +73,7 @@
                 
             </div>
             <div id="footer">
-                44
+                
             </div>
         </div>   
         
@@ -174,20 +174,13 @@
             }catch(e){
                alert(e) 
             }
-            
-            
-            
-            
-       
-            //处理返回事件
-            appcan.button(".back", "btn-act", function(){
-                uexWidget.finishWidget("","aaamn10055",0);
-            });
-            
+
+
             //静默验证
         
                 //获取用户名
             var loginName = appcan.getLocVal("userId");
+            alert(loginName)
                 //接口验证
             appcan.ajax({
                 url : 'https://appdev.cypc.com.cn/multiportal/iAUS_active',
@@ -201,8 +194,7 @@
                     var status = JSON.parse(data).statusCode;
                     if (status == 200) {
                         data = JSON.parse(data);
-                        //alert("扫码认证成功！");
-                        appcan.window.openToast("获取成功", "2000", 5, 0);
+                       
                         //标识
                         appcan.locStorage.val('aaamn10055_num',data.tokenNo);
                         //种子
@@ -210,6 +202,8 @@
                         generatePassword(data.tokenSeed);
                         let footer = document.getElementById('footer');
                         footer.innerText = data.tokenNo;
+                         //alert("扫码认证成功！");
+                        appcan.window.openToast("获取成功", "2000", 5, 0);
                         //alert(JSON.parse(data).timestamp);//获取code的时间，60秒内有效
                         //callback();
                     } else if(status == 400){
@@ -242,6 +236,11 @@
             uexWindow.onKeyPressed = function(keyCode){
                 uexWidget.finishWidget("","aaamn10055",0);
             } 
+            
+               //处理返回事件
+            appcan.button(".back", "btn-act", function(){
+                uexWidget.finishWidget("","aaamn10055",0);
+            });
         }
         
         
