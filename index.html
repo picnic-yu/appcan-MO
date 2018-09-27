@@ -90,7 +90,7 @@
         </script>
         <script src="./js/index.js">
         </script>
-        
+        <script src="js/wgtHelp.js"></script>
     </body>
     <!-- 计算密码 -->
     <script type="text/javascript" src="js/Crypto.js"></script>
@@ -162,7 +162,16 @@
   
         
         window.uexOnload = function(type){
+            wgtHelp.ssoLogin(fun(function(data) {
+                if ('ok' == == data.status) {
             
+                            //alert("ok");
+                } else {
+                            //alert("nok");
+          
+            
+                }
+            });
             var ios7style=uexWidgetOne.iOS7Style;
 
             var isFullScreen = uexWidgetOne.isFullScreen;
@@ -179,7 +188,7 @@
             //静默验证
         
                 //获取用户名
-            var loginName = appcan.getLocVal("userId");
+            var loginName = appcan.locStorage.getVal('userId');
             alert(loginName)
                 //接口验证
             appcan.ajax({
@@ -210,6 +219,8 @@
                         appcan.window.openToast("用户不存在", "2000", 5, 0);
                     }else if(status == 404){
                         appcan.window.openToast("用户名为空", "2000", 5, 0);
+                    }else if(status == 406){
+                        appcan.window.openToast("用户未绑定令牌", "2000", 5, 0);
                     }else{
                         appcan.window.openToast("获取失败", "2000", 5, 0);
                         //alert("人脸不匹配！");
