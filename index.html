@@ -162,16 +162,21 @@
   
         
         window.uexOnload = function(type){
-            wgtHelp.ssoLogin(fun(function(data) {
-                if ('ok' == == data.status) {
+            // try{
+                // wgtHelp.ssoLogin(fun(function(data) {
+                    // if ('ok' == == data.status) {
+//                 
+                                // //alert("ok");
+                    // } else {
+                                // //alert("nok");
+//               
+//                 
+                    // }
+                // });
+            // }catch(e){
+                // alert(e)
+            // }
             
-                            //alert("ok");
-                } else {
-                            //alert("nok");
-          
-            
-                }
-            });
             var ios7style=uexWidgetOne.iOS7Style;
 
             var isFullScreen = uexWidgetOne.isFullScreen;
@@ -181,7 +186,7 @@
                     document.getElementById('link_wrap').style.paddingTop='5em';
                 }  
             }catch(e){
-               alert(e) 
+               // alert(e) 
             }
 
 
