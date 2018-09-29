@@ -102,13 +102,13 @@
                     </div>
                    
                 </div>
-                <div class='item' onclick='handlePickImage()'>
+                <div class='item' onclick='handleLogin()'>
                     <div class='left'>
-                        <img src="image/image.png"/>
+                        <img src="image/icon_login.png"/>
                     </div>
                     <div class='right'>
                          
-                                                        读图激活
+                                                        静默激活
                         
                     </div>
                    
@@ -170,7 +170,6 @@ function decrypt(word){
 
 function ScannerSuccessCallBack(opCode, dataType, data) {
  
-    alert(data)
     data = JSON.parse(data);
     var str = data.code.split(" ");
     parseCode(str);
@@ -247,35 +246,49 @@ function handleScan () {
 }
 
 
-function handlePickImage() {
-    var data = {
-        min:1,
-        max:1,
-        quality:1,
-        detailedInfo:true
-    }
-    var json = JSON.stringify(data);
-    uexImage.openPicker(json)
-    
-    // var data = {
-        // min:1,
-        // max:1,
-        // quality:1,
-        // detailedInfo:true,
-        // style：1
-    // }
-    // uexImage.openPicker(data,function(error,info){
-        // if(error==-1){
-            // alert("cancelled!");
-        // }else if(error==0){
-            // alert(info.data);
-            // if(info.detailedImageInfo){
-                // alert(JSON.stringify(info.detailedImageInfo));
-            // }
-        // }else{
-            // alert("error");
-        // }
-    // });
+function handleLogin() {
+     //静默验证
+        
+        //获取用户名
+    var loginName = appcan.locStorage.getVal('userId');
+        //接口验证
+    appcan.ajax({
+        url : 'https://appdev.cypc.com.cn/multiportal/iAUS_active',
+        type : 'POST',
+        data : {loginName:loginName},
+        // offline : false,
+        //offlineDataPath : 'wgt://aaa/',
+        contentType : false,
+        success : function(data) {
+      
+            var status = JSON.parse(data).statusCode;
+            if (status == 200) {
+                data = JSON.parse(data);
+               
+                //标识
+                appcan.locStorage.val('aaamn10055_num',data.tokenNo);
+                //种子
+                appcan.locStorage.val('aaamn10055_seed',data.tokenSeed);
+                
+                appcan.window.openToast("获取成功", "2000", 5, 0);
+                uexWindow.open('index', '0', "index.html", '0', '', '', 0);
+                //callback();
+            } else if(status == 400){
+                appcan.window.openToast("用户不存在", "2000", 5, 0);
+            }else if(status == 404){
+                appcan.window.openToast("用户名为空", "2000", 5, 0);
+            }else if(status == 406){
+                appcan.window.openToast("用户未绑定令牌", "2000", 5, 0);
+            }else{
+                appcan.window.openToast("获取失败", "2000", 5, 0);               
+            }
+            
+           
+        },
+        error : function(e) {
+            appcan.window.openToast("获取失败", "2000", 5, 0);
+        }
+    });
  
 }
 
@@ -288,24 +301,6 @@ window.uexOnload = function(){
 
     uexScanner.cbOpen = ScannerSuccessCallBack;
     
-    uexImage.onPickerClosed=function(info){
-        alert(info)
-        info = JSON.parse(info);
-        if(info.data.length){
-            var url = info.data[0];  
-            try{
-                var result = uexScanner.recognizeFromImage(url);  
-            alert(result)
-                var str = result.split(" ");
-                
-                parseCode(str); 
-            }catch(e){
-                alert(e)  
-            }
-            
-        }
-        
-    }
     
     var ios7style=uexWidgetOne.iOS7Style;
 

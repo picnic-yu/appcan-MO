@@ -191,53 +191,55 @@
 
 
             //静默验证
-        
+            
                 //获取用户名
             var loginName = appcan.locStorage.getVal('userId');
-            alert(loginName)
                 //接口验证
-            appcan.ajax({
-                url : 'https://appdev.cypc.com.cn/multiportal/iAUS_active',
-                type : 'POST',
-                data : {loginName:loginName},
-                // offline : false,
-                //offlineDataPath : 'wgt://aaa/',
-                contentType : false,
-                success : function(data) {
-                    //alert("data=="+data);
-                    var status = JSON.parse(data).statusCode;
-                    if (status == 200) {
-                        data = JSON.parse(data);
+            if(!seed){
+                appcan.ajax({
+                    url : 'https://appdev.cypc.com.cn/multiportal/iAUS_active',
+                    type : 'POST',
+                    data : {loginName:loginName},
+                    // offline : false,
+                    //offlineDataPath : 'wgt://aaa/',
+                    contentType : false,
+                    success : function(data) {
+                  
+                        var status = JSON.parse(data).statusCode;
+                        if (status == 200) {
+                            data = JSON.parse(data);
+                           
+                            //标识
+                            appcan.locStorage.val('aaamn10055_num',data.tokenNo);
+                            //种子
+                            appcan.locStorage.val('aaamn10055_seed',data.tokenSeed);
+                            generatePassword(data.tokenSeed);
+                            let footer = document.getElementById('footer');
+                            footer.innerText = data.tokenNo;
+                            appcan.window.openToast("获取成功", "2000", 5, 0);
+                            //callback();
+                        } else if(status == 400){
+                            appcan.window.openToast("用户不存在", "2000", 5, 0);
+                            uexWindow.open('active', '0', "active.html", '0', '', '', 0);
+                        }else if(status == 404){
+                            appcan.window.openToast("用户名为空", "2000", 5, 0);
+                            uexWindow.open('active', '0', "active.html", '0', '', '', 0);
+                        }else if(status == 406){
+                            appcan.window.openToast("用户未绑定令牌", "2000", 5, 0);
+                            uexWindow.open('active', '0', "active.html", '0', '', '', 0);
+                        }else{
+                            appcan.window.openToast("获取失败", "2000", 5, 0);            
+                            uexWindow.open('active', '0', "active.html", '0', '', '', 0);   
+                        }
+                        
                        
-                        //标识
-                        appcan.locStorage.val('aaamn10055_num',data.tokenNo);
-                        //种子
-                        appcan.locStorage.val('aaamn10055_seed',data.tokenSeed);
-                        generatePassword(data.tokenSeed);
-                        let footer = document.getElementById('footer');
-                        footer.innerText = data.tokenNo;
-                         //alert("扫码认证成功！");
-                        appcan.window.openToast("获取成功", "2000", 5, 0);
-                        //alert(JSON.parse(data).timestamp);//获取code的时间，60秒内有效
-                        //callback();
-                    } else if(status == 400){
-                        appcan.window.openToast("用户不存在", "2000", 5, 0);
-                    }else if(status == 404){
-                        appcan.window.openToast("用户名为空", "2000", 5, 0);
-                    }else if(status == 406){
-                        appcan.window.openToast("用户未绑定令牌", "2000", 5, 0);
-                    }else{
+                    },
+                    error : function(e) {
                         appcan.window.openToast("获取失败", "2000", 5, 0);
-                        //alert("人脸不匹配！");
                     }
-                    
-                   
-                },
-                error : function(e) {
-                    appcan.window.openToast("获取失败", "2000", 5, 0);
-                    //alert("error" + e);
-                }
-            });
+                });
+            }
+            
             
             var name = uexWidgetOne.platformName;
             
