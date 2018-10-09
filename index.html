@@ -158,7 +158,7 @@
  function handleBack (){
      uexWidget.finishWidget("","aaamn10055",0);
  }
-  var seed = appcan.locStorage.getVal('aaamn10055_seed');
+  
   
         
         window.uexOnload = function(type){
@@ -189,7 +189,7 @@
                // alert(e) 
             }
 
-
+            var seed = appcan.locStorage.getVal('aaamn10055_seed');
             //静默验证
             
                 //获取用户名
@@ -238,6 +238,8 @@
                         appcan.window.openToast("获取失败", "2000", 5, 0);
                     }
                 });
+            }else{
+               generatePassword(seed);
             }
             
             
@@ -295,7 +297,7 @@
         tick();
         
         function tick() {
-        
+            var seed = appcan.locStorage.getVal('aaamn10055_seed');
           var now = new Date()
             , s = now.getSeconds(); //获取秒
             if(s == 0){
