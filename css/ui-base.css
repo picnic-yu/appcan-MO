@@ -211,6 +211,7 @@ ul, li {
 .uh .ut, .uf .ut {
     padding: .72em 1em .72em;
     margin: 0;
+    margin-left:-4em;
 }
 
 .ufl {
